@@ -57,7 +57,7 @@
 	</table>
 	<br />
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px;">
-		REKAP HASIL TIMBANG KENDARAAN
+		REKAP HASIL TIMBANG KENDARAAN (TRIAL)
 	</div>
 	<br/>
 	<table style="width: 100%; margin-bottom: 5px;font-size:11px;" id="tableCheckout">

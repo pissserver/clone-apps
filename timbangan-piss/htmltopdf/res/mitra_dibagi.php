@@ -75,7 +75,7 @@
 		</tr>
 	</table><br/>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-bottom:5px;">
-		PENGEMBALIAN UPAH MITRA
+		PENGEMBALIAN UPAH MITRA (TRIAL)
 	</div>
 	<table style="margin-bottom: 5px;font-size:10pt;" id="tableCheckout">
 		<tr><td>Tanggal Kerja	</td><td> : <?php echo date("d-m-Y", strtotime($work_date)); ?> </td></tr>

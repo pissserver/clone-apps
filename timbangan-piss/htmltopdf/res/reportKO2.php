@@ -47,6 +47,7 @@
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
 		SETORAN TONASE KASIR OPERASIONAL PISS
+		(TRIAL)
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:11pt; width:400px;" >

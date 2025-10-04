@@ -389,7 +389,7 @@
 								</li>
 							</ul>
 
-							<li>
+							<!-- <li>
 								<a class="<?= isActive(['developer.php']); ?> notification-wrapper" href="developer.php">
 									<?php 
 										if ($countRevision != 0) {
@@ -400,7 +400,7 @@
 									?>
 									<i class="fa fa-pencil fa-fw"></i> Revisi <span style="margin-left: 100px;"></span>
 								</a>
-							</li>
+							</li> -->
 						</li>
                     </ul>
                 </div>

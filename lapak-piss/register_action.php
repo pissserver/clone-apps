@@ -279,6 +279,7 @@
 	}
 	
 	elseif($task == 'acc'){
+		$date_in = date('Y-m-d');
 		// ambil id pemohon
 		$id		= $_GET['id'];
 		//Jika DP > total
@@ -344,7 +345,8 @@
 																	`merchant_status`, 
 																	`active_block`,
 																	`kat_merchant`, 
-																	`asal_pasar`) 
+																	`asal_pasar`,
+																	`tanggal_masuk`) 
 											VALUES (	'".$mid."', 
 														'".$r['req_name']."', 
 														'".$r['req_nick']."', 
@@ -360,7 +362,8 @@
 														'Aktif', 
 														'".$block."',
 														'".$r['kat_merchant']."', 
-														'".$r['asal_pasar']."')
+														'".$r['asal_pasar']."',
+														'".$date_in."')
 										");
 				
 				//Ambil id merchant yg barusan masuk

@@ -420,7 +420,7 @@
 								</li>
 							</ul>
 
-							<li><a class="<?= isActive(['developer.php']); ?>" href="developer.php"><i class="fa fa-pencil fa-fw"></i> Revisi <span style="margin-left: 100px;"></span></a></li>
+							<!-- <li><a class="<?= isActive(['developer.php']); ?>" href="developer.php"><i class="fa fa-pencil fa-fw"></i> Revisi <span style="margin-left: 100px;"></span></a></li> -->
 						</li>
                     </ul>
                 </div>

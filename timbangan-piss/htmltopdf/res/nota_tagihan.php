@@ -221,7 +221,7 @@
 	</table>
 	<br />
 	<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:-5px;">
-		NOTA TAGIHAN TONASE
+		NOTA TAGIHAN TONASE (TRIAL)
 	</div>
 	<br />
 	<!-- <div style="font-size: 12px; font-weight: bold; margin-top: -5px;">Data timbangan akhir adalah sebagai berikut:</div> -->

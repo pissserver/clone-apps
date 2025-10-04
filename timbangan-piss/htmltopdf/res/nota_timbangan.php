@@ -58,7 +58,7 @@
 	</table>
 	<br />
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:-5px; margin-bottom:5px;">
-		NOTA TIMBANG
+		NOTA TIMBANG (TRIAL)
 	</div>
 	<table style="font-size:9pt; width:100%;" id="tableCheckout" >
 		<tr>

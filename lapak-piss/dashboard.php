@@ -267,6 +267,10 @@
         </script>
         <script>
             function animateValue(id, start, end, duration, isCurrency = false) {
+                if (end === 0) {
+                    document.getElementById(id).innerHTML = 0;
+                    return;
+                }
                 let obj = document.getElementById(id);
                 let range = end - start;
                 let current = start;

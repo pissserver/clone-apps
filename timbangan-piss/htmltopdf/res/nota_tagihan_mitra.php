@@ -152,7 +152,7 @@
 	</table>
 	<br />
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px;">
-		NOTA TAGIHAN MITRA
+		NOTA TAGIHAN MITRA (TRIAL)
 	</div>
 	<br/>
 	<!-- <div style="font-size: 12px; font-weight: bold;">Data timbangan akhir adalah sebagai berikut:</div> -->

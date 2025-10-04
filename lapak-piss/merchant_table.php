@@ -1,5 +1,20 @@
 <?php
 	include "connection.php";
+
+	function dayAgo($date) {
+		$timestamp = strtotime($date);
+		$today = strtotime(date('Y-m-d')); // hanya tanggal hari ini (tanpa jam)
+		$daysDiff = floor(($today - $timestamp) / 86400); // 86400 = detik dalam 1 hari
+
+		if ($daysDiff <= 0) {
+			return "Hari ini";
+		} elseif ($daysDiff == 1) {
+			return "1 hari yang lalu";
+		} else {
+			return $daysDiff . " hari yang lalu";
+		}
+	}
+
 ?>
 <!-- jquery -->
 <script src="dataTables/jquery.dataTables.js"></script>
@@ -22,7 +37,7 @@
 			<th style="vertical-align: middle; text-align: center; width:9%;">LAPAK</th>
 			<th style="vertical-align: middle; text-align: center; width:7%;">JENIS PEDAGANG</th>
 			<th style="vertical-align: middle; text-align: center; width:7%;">STATUS</th>
-			<!-- <th style="vertical-align: middle; text-align: center; width:7%;">STATUS 2</th> -->
+			<th style="vertical-align: middle; text-align: center; width:7%;">TGL MASUK</th>
 			<th style="vertical-align: middle; text-align: center; width:7%;">STATUS PEDAGANG</th>
 			<th style="vertical-align: middle; text-align: center; width:5%;">AKSI</th>
 		</tr>
@@ -35,7 +50,8 @@
 								merchant_type, 
 								merchant_status, 
 								merchant_status2,
-								kat_merchant
+								kat_merchant,
+								tanggal_masuk
 					from 		merchant 
 					order by 	merchant_id desc";
 		$query 	= mysql_query($sql);
@@ -57,6 +73,7 @@
 			$counter++;
 		}
 		$lapak 	= "".$string;
+		
 		?>
 		<tr>
 			<td style="vertical-align: middle; text-align:center;"><?php echo $no; ?></td>
@@ -70,7 +87,13 @@
 					<i class="fa <?php echo $data['merchant_status'] == 'Aktif' ? 'fa-check' : 'fa-remove'; ?> fa-fw"></i>&nbsp;<?php echo $data['merchant_status']; ?>
 				</div>
 			</td>
-			<!-- <td style="vertical-align: middle; text-align: center;"><?php echo $data['merchant_status2']; ?></td> -->
+			<td style="vertical-align: middle; text-align: center;">
+				<?php echo date('d F Y', strtotime($data['tanggal_masuk'])); ?>
+				<br>
+				<div style="background-color: #428bca; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 0 auto; width: 125px; font-size: 11px;">
+					<?php echo dayAgo($data['tanggal_masuk']); ?>
+				</div>
+			</td>
 			<td style="vertical-align: middle; text-align: center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['kat_merchant'] == 'Tetap' ? 'green' : '#E3AB57'; ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		
 					<i class="fa <?php echo $data['kat_merchant'] == 'Tetap' ? 'fa-check' : 'fa-circle-o'; ?> fa-fw"></i>&nbsp;<?php echo $data['kat_merchant']; ?>

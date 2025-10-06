@@ -15,7 +15,7 @@
             </tr>
         </table>-->
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			LAPORAN TRANSAKSI OUTSTANDING TIMBANG
+			LAPORAN TRANSAKSI OUTSTANDING TIMBANG (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDTOPO (PISS)
 		</div>
     </page_header>

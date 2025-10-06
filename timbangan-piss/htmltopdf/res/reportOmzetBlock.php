@@ -16,7 +16,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="5mm" backright="5mm">
 	<!-- <page_header> -->
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:-20px; margin-right:65px;">
-			RINCIAN PENDAPATAN TONASE BLOK <?php echo $block; ?>
+			RINCIAN PENDAPATAN TONASE BLOK <?php echo $block; ?> (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     <!-- </page_header> -->
@@ -127,7 +127,7 @@
 	</table>
 	<br />
 	<div style="font-size: 12px; font-weight: bold; text-align: center; margin-bottom:10px;margin-top:30px;">
-		PEDAGANG YANG TIDAK MEMILIKI TONASE
+		PEDAGANG YANG TIDAK MEMILIKI TONASE (TRIAL)
 	</div>
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:680px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>

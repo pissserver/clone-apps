@@ -32,7 +32,7 @@
     $sheet->setTitle("Rincian Tonase Harian");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN TONASE HARIAN");
+    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN TONASE HARIAN (TRIAL)");
     $sheet->setCellValue("A3", "JENIS KOMODITI");
     $sheet->setCellValue("A4", "TANGGAL");
     $sheet->setCellValue("B3", " : ");
@@ -172,7 +172,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase Harian' . ' (' .$commodity. ')_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase Harian (Trial)' . ' (' .$commodity. ')_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

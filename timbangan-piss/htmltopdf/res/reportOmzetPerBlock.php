@@ -29,7 +29,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="0mm" backright="0mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px; margin-bottom: 10px; margin-right:65px;">
-			RINCIAN PENDAPATAN TONASE BULANAN BLOK <?php echo $block; ?>
+			RINCIAN PENDAPATAN TONASE BULANAN BLOK <?php echo $block; ?> (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

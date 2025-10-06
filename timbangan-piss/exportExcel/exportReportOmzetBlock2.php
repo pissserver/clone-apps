@@ -25,7 +25,7 @@
     $sheet->setTitle("Tonase Belum Terbayar PerBlock");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "REKAP TAGIHAN TONASE BELUM TERBAYAR BLOK " .$block);
+    $sheet->setCellValue("A1", "REKAP TAGIHAN TONASE BELUM TERBAYAR BLOK " .$block. " (Trial)");
     $sheet->setCellValue("A3", "TANGGAL AKHIR TAGIHAN");
     $sheet->setCellValue("B3", " : ");
     $sheet->setCellValue("C3", date('d M Y', strtotime($date2)));
@@ -174,7 +174,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Tagihan Tonase Belum Terbayar Block' . ' (' .$block. ')_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Tagihan Tonase Belum Terbayar Block' . ' (' .$block. ') ' . '(Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

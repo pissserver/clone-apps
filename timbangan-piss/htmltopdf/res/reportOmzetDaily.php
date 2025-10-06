@@ -16,7 +16,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="10mm" backright="10mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px; margin-right:65px;">
-			LAPORAN TRANSAKSI TIMBANG HARIAN
+			LAPORAN TRANSAKSI TIMBANG HARIAN (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

@@ -67,7 +67,7 @@
     $sheet1->setTitle("Pendapatan Tonase Block");
 
     // Menulis Informasi di Atas Tabel
-    $sheet1->setCellValue("A1", "RINCIAN PENDAPATAN TONASE BLOCK " . $block);
+    $sheet1->setCellValue("A1", "RINCIAN PENDAPATAN TONASE BLOCK " . $block . " (TRIAL)");
     $sheet1->setCellValue("A3", "TANGGAL");
     $sheet1->setCellValue("A4", "DISUSUN BERDASARKAN");
     $sheet1->setCellValue("B3", " : ");
@@ -167,7 +167,7 @@
     $sheet2->setTitle("Pedagang Tanpa Tonase Block");
 
     // Menulis Informasi di Atas Tabel
-    $sheet2->setCellValue("A1", "PEDAGANG YANG TIDAK MEMILIKI TONASE");
+    $sheet2->setCellValue("A1", "PEDAGANG YANG TIDAK MEMILIKI TONASE (TRIAL)");
     $sheet2->setCellValue("A3", "TANGGAL");
     $sheet2->setCellValue("A4", "DISUSUN BERDASARKAN");
     $sheet2->setCellValue("B3", " : ");
@@ -296,7 +296,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase Block' . ' (' .$block. ') by ' .$sort. '_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase Block' . ' (' .$block. ') (Trial) by ' .$sort. '_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

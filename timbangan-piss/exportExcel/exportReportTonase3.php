@@ -21,7 +21,7 @@
     $sheet1->setTitle("Tonase Komoditi (Buah)");
 
       // Menulis Informasi di Atas Tabel
-      $sheet1->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (BUAH)");
+      $sheet1->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (BUAH) (TRIAL)");
       $sheet1->setCellValue("A3", "TANGGAL");
       $sheet1->setCellValue("B3", " : ");
       $sheet1->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -119,7 +119,7 @@
     $sheet2->setTitle("Tonase Komoditi (Sayur)");
 
     // Menulis Informasi di Atas Tabel
-    $sheet2->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (SAYUR)");
+    $sheet2->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (SAYUR) (TRIAL)");
     $sheet2->setCellValue("A3", "TANGGAL");
     $sheet2->setCellValue("B3", " : ");
     $sheet2->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -216,7 +216,7 @@
     $sheet3->setTitle("Tonase Komoditi (Pelengkap)");
 
     // Menulis Informasi di Atas Tabel
-    $sheet3->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (PELENGKAP)");
+    $sheet3->setCellValue("A1", "REKAP PENDAPATAN TONASE SEMUA KOMODITI (PELENGKAP) (TRIAL)");
     $sheet3->setCellValue("A3", "TANGGAL");
     $sheet3->setCellValue("B3", " : ");
     $sheet3->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -309,7 +309,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase PerKomoditi_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Pendapatan Tonase PerKomoditi (Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

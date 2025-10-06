@@ -27,7 +27,8 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		REKAP TAGIHAN TONASE TERBAYAR SELURUH PEDAGANG<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
+		REKAP TAGIHAN TONASE TERBAYAR SELURUH PEDAGANG (TRIAL)
+		<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
     <br/>
 	<table style="margin-bottom: 5px;font-size:10pt; width:300px;" >

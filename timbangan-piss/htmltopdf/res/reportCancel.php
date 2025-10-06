@@ -25,7 +25,7 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		LAPORAN TRANSAKSI TIMBANG BATAL
+		LAPORAN TRANSAKSI TIMBANG BATAL (TRIAL)
 		<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
     <br/>

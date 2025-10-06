@@ -27,7 +27,7 @@
             </tr>
         </table>-->
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			RINCIAN PENDAPATAN TONASE HARIAN
+			RINCIAN PENDAPATAN TONASE HARIAN (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

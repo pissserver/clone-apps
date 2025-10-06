@@ -52,7 +52,7 @@
     $sheet->setTitle("Laporan Tonase Terbayar");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN TAGIHAN TONASE TERBAYAR");
+    $sheet->setCellValue("A1", "RINCIAN TAGIHAN TONASE TERBAYAR (TRIAL)");
     $sheet->setCellValue("A3", "JENIS PEDAGANG");
     $sheet->setCellValue("A4", "TANGGAL");
     $sheet->setCellValue("B3", " : ");
@@ -172,7 +172,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Tagihan Tonase Terbayar' . ' (' .$commodity. ')_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Tagihan Tonase Terbayar (Trial)' . ' (' .$commodity. ')_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

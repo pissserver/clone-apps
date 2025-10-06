@@ -56,7 +56,7 @@
     $sheet1->setTitle("Tonase Seluruh Pedagang");
 
     // Menulis Informasi di Atas Tabel
-    $sheet1->setCellValue("A1", "REKAP PENDAPATAN TONASE SELURUH PEDAGANG");
+    $sheet1->setCellValue("A1", "REKAP PENDAPATAN TONASE SELURUH PEDAGANG (TRIAL)");
     $sheet1->setCellValue("A3", "JENIS KOMODITI");
     $sheet1->setCellValue("A4", "TANGGAL");
     $sheet1->setCellValue("B3", " : ");
@@ -147,7 +147,7 @@
     $sheet2->setTitle("Tanpa Tonase Seluruh Pedagang");
 
     // Menulis Informasi di Atas Tabel
-    $sheet2->setCellValue("A1", "PEDAGANG YANG TIDAK MEMILIKI TONASE");
+    $sheet2->setCellValue("A1", "PEDAGANG YANG TIDAK MEMILIKI TONASE (TRIAL)");
     $sheet2->setCellValue("A3", "JENIS PEDAGANG");
     $sheet2->setCellValue("A4", "TANGGAL");
     $sheet2->setCellValue("B3", " : ");
@@ -265,7 +265,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Pendapatan Tonase Seluruh Pedagang' . ' (' .$commodity. ') by ' .$sort. '_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Pendapatan Tonase Seluruh Pedagang (Trial)' . ' (' .$commodity. ') by ' .$sort. '_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

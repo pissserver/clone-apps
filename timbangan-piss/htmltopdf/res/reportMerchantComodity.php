@@ -31,7 +31,7 @@
             </tr>
         </table>-->
 		<div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:20px;">
-			RINCIAN PENDAPATAN TONASE PER PEDAGANG & KOMODITI 
+			RINCIAN PENDAPATAN TONASE PER PEDAGANG & KOMODITI (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

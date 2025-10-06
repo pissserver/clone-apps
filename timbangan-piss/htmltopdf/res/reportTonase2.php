@@ -1,3 +1,4 @@
+
 <?php
 	include "../connection.php";
 	$date1		= $_POST['date1'];
@@ -16,7 +17,7 @@
             </tr>
         </table>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			RINCIAN PENDAPATAN TONASE PER KOMODITI
+			RINCIAN PENDAPATAN TONASE PER KOMODITI (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

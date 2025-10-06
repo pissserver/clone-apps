@@ -53,7 +53,7 @@
     $sheet->setTitle("Mitra Terbayar Seluruh Pedagang");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "REKAP TAGIHAN MITRA TERBAYAR SELURUH PEDAGANG");
+    $sheet->setCellValue("A1", "REKAP TAGIHAN MITRA TERBAYAR SELURUH PEDAGANG (TRIAL)");
     $sheet->setCellValue("A3", "JENIS PEDAGANG");
     $sheet->setCellValue("A4", "TANGGAL");
     $sheet->setCellValue("B3", " : ");
@@ -157,7 +157,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Tagihan Mita Terbayar Seluruh Pedagang' . ' (' .$commodity. ') by ' .$sort. '_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Tagihan Mita Terbayar Seluruh Pedagang (Trial)' . ' (' .$commodity. ') by ' .$sort. '_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

@@ -38,7 +38,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="2mm" backright="2mm">
 	<!-- <page_header> -->
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:-30px;">
-			REKAP PENDAPATAN TONASE SELURUH PEDAGANG
+			REKAP PENDAPATAN TONASE SELURUH PEDAGANG (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     <!-- </page_header> -->
@@ -115,7 +115,7 @@
 	</table>
 	<br />
 	<div style="font-size: 12px; font-weight: bold; text-align: center; margin-bottom:20px; margin-top:30px;">
-		PEDAGANG YANG TIDAK MEMILIKI TONASE
+		PEDAGANG YANG TIDAK MEMILIKI TONASE (TRIAL)
 	</div>
 	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:8pt; width:800px; margin-right:0px;" id="tableNonkomoditi">
 		<tr>

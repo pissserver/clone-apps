@@ -41,7 +41,7 @@
     $sheet->setTitle("Rincian Mitra Dibagi (Sebelum)");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN MITRA DIBAGIKAN (SEBELUM DIBULATKAN)");
+    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN MITRA DIBAGIKAN (SEBELUM DIBULATKAN) (TRIAL)");
     $sheet->setCellValue("A3", "TANGGAL KERJA MITRA");
     $sheet->setCellValue("B3", " : ");
     $sheet->setCellValue("C3", date('d M Y', strtotime($date2)));
@@ -204,7 +204,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Pendapatan Mitra Dibagikan (Sebelum Dibulatkan)_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Pendapatan Mitra Dibagikan (Sebelum Dibulatkan) (Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

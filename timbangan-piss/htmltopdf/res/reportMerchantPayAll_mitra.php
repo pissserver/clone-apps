@@ -27,7 +27,7 @@
         </table>
     </page_footer>
     <div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-	REKAP TAGIHAN MITRA TERBAYAR SELURUH PEDAGANG
+	REKAP TAGIHAN MITRA TERBAYAR SELURUH PEDAGANG (TRIAL)
 	<br>PASAR INDUK SURABAYA (PISS)
 	</div>
     <br/>

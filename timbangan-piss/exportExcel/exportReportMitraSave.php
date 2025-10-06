@@ -42,7 +42,7 @@
     $sheet->setTitle("Rekap Mitra Dibagi (Setelah)");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN MITRA DISIMPAN (SETELAH DIBULATKAN)");
+    $sheet->setCellValue("A1", "RINCIAN PENDAPATAN MITRA DISIMPAN (SETELAH DIBULATKAN) (TRIAL)");
     $sheet->setCellValue("A3", "TANGGAL");
     $sheet->setCellValue("B3", " : ");
     $sheet->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -194,7 +194,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Pendapatan Mitra Dibagikan (Setelah Dibulatkan)_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Pendapatan Mitra Dibagikan (Setelah Dibulatkan) (Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

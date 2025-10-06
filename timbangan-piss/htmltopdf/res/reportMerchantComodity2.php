@@ -25,7 +25,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="10mm" backright="10mm">
 	<page_header>
 		<div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:20px;">
-			REKAP PENDAPATAN TONASE PER PEDAGANG & KOMODITI
+			REKAP PENDAPATAN TONASE PER PEDAGANG & KOMODITI (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

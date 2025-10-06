@@ -244,7 +244,7 @@
     $sheet->getStyle("A7:" . $column . $row)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "REKAP PENDAPATAN TONASE BULANAN PER KOMODITI");
+    $sheet->setCellValue("A1", "REKAP PENDAPATAN TONASE BULANAN PER KOMODITI (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -257,7 +257,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Pendapatan Tonase Bulanan PerKomoditi' . ' (' .$type. ')_'  . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Pendapatan Tonase Bulanan PerKomoditi' . ' (' .$type. ') (Trial)_'  . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

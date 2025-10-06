@@ -56,7 +56,7 @@
         </table>
     </page_footer>
     <div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px; margin-right:65px;">
-		REKAP PENDAPATAN MITRA DIBAGIKAN (SEBELUM DIBULATKAN)
+		REKAP PENDAPATAN MITRA DIBAGIKAN (SEBELUM DIBULATKAN) (TRIAL)
 		<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
 	<br />

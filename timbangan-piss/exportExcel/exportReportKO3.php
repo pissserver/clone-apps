@@ -18,7 +18,7 @@
     $sheet->setTitle("Rekap KO ke KM");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "REKAP SETORAN TONASE KO ke KM");
+    $sheet->setCellValue("A1", "REKAP SETORAN TONASE KO ke KM (TRIAL)");
     $sheet->setCellValue("A3", "TANGGAL SETORAN KO");
     $sheet->setCellValue("B3", " : ");
     $sheet->setCellValue("C3", date('d M Y', strtotime($date1)) . ' s/d ' . date('d M Y', strtotime($date2)));
@@ -117,7 +117,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rekap Setoran Tonase KO ke KM_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rekap Setoran Tonase KO ke KM (Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

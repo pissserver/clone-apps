@@ -24,7 +24,8 @@
 <page backtop="15mm" backbottom="10mm" backleft="5mm" backright="5mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px;">
-			RINCIAN TAGIHAN TONASE TERBAYAR PER PEDAGANG<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
+			RINCIAN TAGIHAN TONASE TERBAYAR PER PEDAGANG (TRIAL)
+			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>
 	<table style="margin-bottom: 5px;font-size:10pt; width:450px;" >

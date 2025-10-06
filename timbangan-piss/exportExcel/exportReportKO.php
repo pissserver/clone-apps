@@ -25,7 +25,7 @@
     $sheet->setTitle("Rincian KO Tonase");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN SETORAN TONASE KASIR OPERASIONAL");
+    $sheet->setCellValue("A1", "RINCIAN SETORAN TONASE KASIR OPERASIONAL (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -161,7 +161,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Setoran Tonase Kasir Operasional_' . date('Ymd') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Setoran Tonase Kasir Operasional (Trial)_' . date('Ymd') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

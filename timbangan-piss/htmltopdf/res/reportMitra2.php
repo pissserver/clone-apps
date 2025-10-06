@@ -14,7 +14,7 @@
         </table>
     </page_header>
 	<div style="font-size: 14px; font-weight: bold; text-align: center; margin-top:0px;">
-		RINCIAN PENDAPATAN MITRA DISIMPAN (SEBELUM DIBULATKAN)
+		RINCIAN PENDAPATAN MITRA DISIMPAN (SEBELUM DIBULATKAN) (TRIAL)
 		<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 	</div>
 	<table style="margin-top: 10px; margin-bottom: 5px;font-size:10pt; width:500px;" >

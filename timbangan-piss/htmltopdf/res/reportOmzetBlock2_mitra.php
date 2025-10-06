@@ -9,7 +9,7 @@
 <page backtop="15mm" backbottom="10mm" backleft="10mm" backright="10mm">
 	<page_header>
 		<div style="font-size: 12px; font-weight: bold; text-align: center; margin-top:20px; margin-right:65px;">
-			REKAP TAGIHAN MITRA BELUM TERBAYAR BLOK <?php echo $block; ?>
+			REKAP TAGIHAN MITRA BELUM TERBAYAR BLOK <?php echo $block; ?> (TRIAL)
 			<br>PASAR INDUK SURABAYA SIDOTOPO (PISS)
 		</div>
     </page_header>

@@ -28,7 +28,7 @@
     $sheet->setTitle("Outstanding KM Mitra");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN OUTSTANDNG KMM MITRA");
+    $sheet->setCellValue("A1", "RINCIAN OUTSTANDNG KMM MITRA (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -121,7 +121,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Outstanding KMM Mitra_' . date('d M Y') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Outstanding KMM Mitra (Trial)_' . date('d M Y') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

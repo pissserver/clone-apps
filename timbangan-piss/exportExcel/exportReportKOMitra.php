@@ -39,7 +39,7 @@
     $sheet->setTitle("Rincian KOM Mitra");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN SETORAN KASIR OPERASIONAL MITRA");
+    $sheet->setCellValue("A1", "RINCIAN SETORAN KASIR OPERASIONAL MITRA (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -184,7 +184,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Setoran Kasir Operasional Mitra_' . date('Ymd') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Setoran Kasir Operasional Mitra (Trial)_' . date('Ymd') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

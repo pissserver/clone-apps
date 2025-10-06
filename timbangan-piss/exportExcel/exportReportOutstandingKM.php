@@ -28,7 +28,7 @@
     $sheet->setTitle("Rincian Outstanding KM");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN OUTSTANDNG KM TONASE");
+    $sheet->setCellValue("A1", "RINCIAN OUTSTANDNG KM TONASE (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -121,7 +121,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Outstanding KM Tonase_' . date('Ymd') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Outstanding KM Tonase (Trial)_' . date('Ymd') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

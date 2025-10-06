@@ -23,7 +23,7 @@
     $sheet->setTitle("Rincian KOM ke KMM");
 
     // Menulis Informasi di Atas Tabel
-    $sheet->setCellValue("A1", "RINCIAN SETORAN KOM ke KMM");
+    $sheet->setCellValue("A1", "RINCIAN SETORAN KOM ke KMM (TRIAL)");
 
     // Membuat text bold
     $sheet->getStyle("A1")->getFont()->setBold(true);
@@ -152,7 +152,7 @@
 
     // Set header untuk download file Excel
     header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment;filename="Rincian Setoran Tonase KO ke KM_' . date('Ymd') . '.xls"');
+    header('Content-Disposition: attachment;filename="Rincian Setoran Tonase KO ke KM (Trial)_' . date('Ymd') . '.xls"');
     header('Cache-Control: max-age=0');
 
     // Menyimpan dan mendownload file Excel

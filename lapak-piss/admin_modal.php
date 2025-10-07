@@ -35,7 +35,6 @@
 			<select class="form-control" name="position" id="position" required>
 				<option value="spv" <?php echo $position == 'spv' ? 'selected' : '';?>>SPV</option>
 				<option value="pp" <?php echo $position == 'pp' ? 'selected' : '';?>>PP</option>
-				<option value="keuangan" <?php echo $position == 'keuangan' ? 'selected' : '';?>>Keuangan</option>
 			</select>
 		</div>
 		<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:10px; margin-right: 10px;">

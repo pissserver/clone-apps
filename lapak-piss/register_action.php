@@ -15,70 +15,70 @@
 	if ($task == 'insert'){
 		$type 	= executeScalar("select lapak_type from lapak where lapak_id = '".$_POST['lapak']."'");
 		//Jika ktp tidak ada yg sama
-		if($_POST['ktp']!=''){
-			$ktp 	= executeScalar("select count(nid_ktp) from request where nid_ktp = '".$_POST['ktp']."'");
-			if($ktp>0){
-				echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
-				window.history.back()</script>";
-				exit();
-			}
-			$ktp 	= $_POST['ktp'];
-			$sim 	= null;
-			$lain 	= null;
-			$nid	= $_POST['nid'];
-		}
-		elseif($_POST['sim']!=''){
-			$sim 	= executeScalar("select count(nid_sim)from request where nid_sim = '".$_POST['sim']."'");
-			if($sim>0){
-				echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
-				window.history.back()</script>";
-				exit();
-			}
-			$sim	= $_POST['sim'];
-			$ktp 	= null;
-			$lain 	= null;
-			$nid	= $_POST['nid'];
-		}
-		elseif($_POST['lain']!=''){
-			$lain 	= executeScalar("select count(nid_lain) from request where nid_lain = '".$_POST['lain']."'");
-			if($lain>0){
-				echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
-				window.history.back()</script>";
-				exit();
-			}
-			$lain 	= $_POST['lain'];
-			$ktp 	= null;
-			$sim 	= null;
-			$nid	= $_POST['nid'];
-		}
-		else{
-			$ktp 	= null;
-			$sim 	= null;
-			$lain 	= null;
-			$nid 	= null;
-		}
+		// if($_POST['ktp']!=''){
+		// 	$ktp 	= executeScalar("select count(nid_ktp) from request where nid_ktp = '".$_POST['ktp']."'");
+		// 	if($ktp>0){
+		// 		echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
+		// 		window.history.back()</script>";
+		// 		exit();
+		// 	}
+		// 	$ktp 	= $_POST['ktp'];
+		// 	$sim 	= null;
+		// 	$lain 	= null;
+		// 	$nid	= $_POST['nid'];
+		// }
+		// elseif($_POST['sim']!=''){
+		// 	$sim 	= executeScalar("select count(nid_sim)from request where nid_sim = '".$_POST['sim']."'");
+		// 	if($sim>0){
+		// 		echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
+		// 		window.history.back()</script>";
+		// 		exit();
+		// 	}
+		// 	$sim	= $_POST['sim'];
+		// 	$ktp 	= null;
+		// 	$lain 	= null;
+		// 	$nid	= $_POST['nid'];
+		// }
+		// elseif($_POST['lain']!=''){
+		// 	$lain 	= executeScalar("select count(nid_lain) from request where nid_lain = '".$_POST['lain']."'");
+		// 	if($lain>0){
+		// 		echo "<script>window.alert('No ID Pedagang sudah ada, mohon dicek lagi');
+		// 		window.history.back()</script>";
+		// 		exit();
+		// 	}
+		// 	$lain 	= $_POST['lain'];
+		// 	$ktp 	= null;
+		// 	$sim 	= null;
+		// 	$nid	= $_POST['nid'];
+		// }
+		// else{
+		// 	$ktp 	= null;
+		// 	$sim 	= null;
+		// 	$lain 	= null;
+		// 	$nid 	= null;
+		// }
 
 		// Pengecekan apakah sudah melakukan pengisian kategori merchant
-		if($_POST['kat_merchant']=='0'){
-			echo "<script>window.alert('Silahkan pilih jenis pedagang dahulu !');
-				window.history.back()</script>";
-			exit();
-		}
+		// if($_POST['kat_merchant']=='0'){
+		// 	echo "<script>window.alert('Silahkan pilih jenis pedagang dahulu !');
+		// 		window.history.back()</script>";
+		// 	exit();
+		// }
 
 		// Pengecekan apakah sudah melakukan pengisian asal pasar
-		if($_POST['asal_pasar']=='0'){
-			echo "<script>window.alert('Silahkan pilih asal pasar dahulu !');
-				window.history.back()</script>";
-			exit();
-		}
+		// if($_POST['asal_pasar']=='0'){
+		// 	echo "<script>window.alert('Silahkan pilih asal pasar dahulu !');
+		// 		window.history.back()</script>";
+		// 	exit();
+		// }
 
 		//jika adrs2 kosong
-		if($_POST['adrs2']==''){
-			$adrs2 = $_POST['adrs1'];
-		}
-		else{
-			$adrs2 = $_POST['adrs2'];
-		}
+		// if($_POST['adrs2']==''){
+		// 	$adrs2 = $_POST['adrs1'];
+		// }
+		// else{
+		// 	$adrs2 = $_POST['adrs2'];
+		// }
 		
 		$insert = mysql_query("	INSERT INTO request (`req_id`, 
 													`lapak_id`, 
@@ -100,20 +100,20 @@
 								VALUES ('', 
 										'".$_POST['lapak']."', 
 										'".$_POST['name1']."', 
-										'".$_POST['name2']."', 
-										'".$_POST['tlp1']."', 
-										'".$_POST['tlp2']."', 
-										'".$_POST['adrs1']."', 
-										'".$adrs2."', 
-										'".$ktp."', 
-										'".$sim."', 
-										'".$lain."', 
-										'".$nid."', 
+										'".$_POST['name1']."', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
+										'NULL', 
 										'".$type."', 
 										'".$date_now."', 
 										'Pending',
-										'".$_POST['kat_merchant']."', 
-										'".$_POST['asal_pasar']."')");
+										'Tetap', 
+										'Belum Pernah')");
 				//$request 	= mysql_insert_id();
 		
 		if($insert){

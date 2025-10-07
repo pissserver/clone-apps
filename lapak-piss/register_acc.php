@@ -80,7 +80,7 @@
 										<input id="name1" name="name1" value="<?php echo $r['req_name']; ?>" type="text" class="form-control" disabled /> 
 										<br />
 										<label>Alamat</label>
-										<input id="adrs1" name="adrs1" value="<?php echo $r['address1']; ?>" type="text" class="form-control" disabled />
+										<input id="adrs1" name="adrs1" value="<?php echo $r['address1'] == 'NULL' ? '-' : $r['address1']; ?>" type="text" class="form-control" disabled />
 										<br />
 										<label>Jenis Jualan</label>
 										<select class="form-control" name="type" id="type" disabled>
@@ -111,38 +111,41 @@
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px">
 													<label>Uang Muka</label>
-													<input id="dp" name="dp" placeholder="0" type="number" class="form-control" required />
+													<input id="dp" name="dp" placeholder="0" value="0" type="number" class="form-control" readonly required />
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px">
 													<label>Cicilan</label>
-													<select class="form-control" name="ins" id="ins" required>
-														<option value="">- Pilih Cicilan -</option>
-														<?php 
-															$sql1 = mysql_query("select * from instalment order by instalment_name");
-															while($d1 = mysql_fetch_array($sql1)){
-															?>
-															<option value="<?php echo $d1['instalment_id'];?>"><?php echo $d1['instalment_name'].' / '.$d1['instalment_count'].'x';?></option>
-														<?php } ?>
+													<select class="form-control" name="ins" id="ins" required readonly>
+														<option value="1">Trial Lapak</option>
 													</select>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group" style="padding: 0 10px;">
 													<label>Bunga Pertahun (%)</label>
-													<input class="form-control" id="interest" name="interest" type="number" placeholder="0" required />
+													<input class="form-control" id="interest" name="interest" type="number" placeholder="0" value="0" readonly required />
 												</div>
 											</div>
 										</div>
 										<div class="form-group" style="padding: 0 10px; margin-top: 5px;">
 											<label>Tanggal Masuk</label>
-											<input id="datein" name="datein" type="date" class="form-control" placeholder="Tanggal Masuk" required
-											data-fv-notempty-message="Tanggal Belum Diisi"/>
+											<input 
+												id="datein" 
+												name="datein" 
+												type="date" 
+												class="form-control" 
+												placeholder="Tanggal Masuk" 
+												required
+												value="<?php echo date('Y-m-d'); ?>" 
+												data-fv-notempty-message="Tanggal Belum Diisi"
+												readonly
+											/>
 										</div>
 										<div class="form-group" style="padding: 0 10px; margin-top: 7px;">
 											<label>Kajian</label>
-											<textarea class="form-control" cols="50" rows="5" id="ket" name="ket" placeholder="Alasan Mengapa Persetujuan diterbitkan ?" required></textarea>
+											<textarea class="form-control" cols="50" rows="5" id="ket" name="ket" placeholder="Alasan Mengapa Persetujuan diterbitkan ?" required readonly>Pendaftaran Pedagang Trial</textarea>
 										</div>
 									</div>
 								</div>

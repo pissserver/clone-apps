@@ -43,12 +43,12 @@
 				$lapak 	= executeScalar("select lapak_name from lapak where lapak_id='".$data['lapak_id']."' ");
 				echo $lapak; ?>
 			</td>
-			<td style="vertical-align: middle; text-align: left;"><?php echo $data['address1']; ?></td>
+			<td style="vertical-align: middle; text-align: left;"><?php echo $data['address1'] == 'NULL' ? 'Tidak ada' : $data['address1']; ?></td>
 			<td style="vertical-align: middle; text-align: center;">
-				<?php echo $data['phone1'] == NULL ? 'Tidak ada' : $data['phone1']; ?>
+				<?php echo $data['phone1'] == 'NULL' ? 'Tidak ada' : $data['phone1']; ?>
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
-				<?php echo $data['phone2'] == NULL ? 'Tidak ada' : $data['phone2']; ?>
+				<?php echo $data['phone2'] == 'NULL' ? 'Tidak ada' : $data['phone2']; ?>
 			</td>
 			<td style="vertical-align: middle; text-align: center;">
 				<div style="vertical-align: middle; background-color: <?php echo $data['merchant_type'] == 'Buah' ? '#428bca' : ($data['merchant_type'] == 'Sayur' ? 'green' : '#EB8317'); ?>; color: #fff; padding: 3px; border-radius: 5px; margin: 5px auto 5px auto; width: 110px;">		

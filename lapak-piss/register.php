@@ -66,20 +66,20 @@
                             <form action="register_action.php?task=insert"  id="formRegister" name = "formRegister" method="POST" class="form-horizontal">
 								<fieldset>
 									<div class="row">
-										<div class="col-lg-6" style="padding:0 10px 0 20px">
+										<div class="col-lg-12" style="padding:0 10px 0 20px">
 											<label>Nama</label>
-											<input id="name1" name="name1" placeholder="Nama Sesuai Ktp" type="text" class="form-control" autofocus="autofocus" required>    
-											<input style="margin-top: 5px;" id="name2" name="name2" placeholder="Nama Alias" type="text" class="form-control">          
+											<input id="name1" name="name1" placeholder="Nama Pedagang" type="text" class="form-control" autofocus="autofocus" required>    
+											<!-- <input style="margin-top: 5px;" id="name2" name="name2" placeholder="Nama Alias" type="text" class="form-control">           -->
 										</div>
 
-										<div class="col-lg-6" style="padding:0 20px 0 10px;">
+										<!-- <div class="col-lg-6" style="padding:0 20px 0 10px;">
 											<label>Alamat</label>
 											<input id="adrs1" name="adrs1" placeholder="Alamat Sesuai KTP" type="text" class="form-control" required/>
 											<input style="margin-top: 5px;" id="adrs2" name="adrs2" placeholder="Alamat Surat (Opsional)" type="text" class="form-control" />
-										</div>
+										</div> -->
 									</div>
 
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-lg-6" style="padding:0 10px 0 20px; margin-top: 15px;">
 											<label>Telepon</label>
 											<input id="tlp1" name="tlp1" placeholder="Telepon Rumah" maxlength="13" onkeydown="return isNumber(event);" type="text" class="form-control" />
@@ -109,10 +109,10 @@
 												<option value="Lainnya">Lainnya</option>
 											</select>
 										</div>
-									</div>
+									</div> -->
 
 									<div class="row">
-										<div class="col-lg-4" style="padding:0 10px 0 20px; margin-top: 15px;">
+										<div class="col-lg-12" style="padding:0 10px 0 20px; margin-top: 15px;">
 											<label>Lapak</label>
 											<select class="form-control chzn-select" name="lapak" id="lapak" required>
 												<option value="">- Pilih Lapak -</option>
@@ -125,7 +125,7 @@
 											</select>
 										</div>
 
-										<div class="col-lg-4" style="padding:0 10px 0 10px; margin-top: 15px;">
+										<!-- <div class="col-lg-4" style="padding:0 10px 0 10px; margin-top: 15px;">
 											<label>Jenis Pedagang</label>
 											<select class="form-control" name="kat_merchant" id="kat_merchant" >
 												<option value="0" selected disabled>-- Pilih Jenis Pedagang --</option>
@@ -148,7 +148,7 @@
 												<option value="Pasar Wonokusumo">Pasar Wonokusumo</option>
 												<option value="Pasar Lainnya">Pasar Lainnya</option>
 											</select>
-										</div>
+										</div> -->
 									</div>
 									
 									<div class="row">

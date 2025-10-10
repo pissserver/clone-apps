@@ -67,10 +67,16 @@
                         class="login100-form validate-form"
                     >
                         <span class="login100-form-title pb-3">
-                            Login Listrik
-                            <span style="color: #428bca; font-weight: 700"
-                                >PISS👋</span
-                            >
+                            Login
+                            <span
+                                style="
+                                    color: #fff;
+                                    background-color: #ca4242;
+                                    font-weight: 700;
+                                    padding: 2px 8px;
+                                    border-radius: 12px;
+                                "
+                                >Trial Listrik</span>
                         </span>
 
                         <div class="illustration text-center mb-4">

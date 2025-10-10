@@ -8,14 +8,15 @@
 	
 	//Cek session role user yg masuk
 	if($_SESSION['role']==''){//jika role kosong
-		echo "<script>window.alert('ANda Tidak Mempunyai Hak Akses');
+		echo "<script>window.alert('Anda Tidak Mempunyai Hak Akses');
 		window.history.back()</script>";
 		exit();
 	}
 	$task		= $_GET['task'];
 	// $checker	= -1;
-	$id			= $_GET['id'];
-	$checker    = executeScalar("select checker_id from weighing where weighing_id = '".$id."'");
+	// $id			= $_GET['id'];
+	// $checker    = executeScalar("select checker_id from weighing where weighing_id = '".$id."'");
+	$checker    = $_POST['checker'];
 
 	//Spv Masuk
 	if($task=='in'){

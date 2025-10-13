@@ -50,7 +50,7 @@
                                                 $nick = '';
                                             }
                                     ?>
-                                        <option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
+                                        <option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '. (!empty($lpk) ? $lpk : 'Tanpa Lapak');?></option>
                                     <?php } ?>
                                 </select>
                             </div>

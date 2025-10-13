@@ -54,7 +54,7 @@
                                 <div class="form-group" style="padding:10px; margin-top:-10px;">
                                     <label>Pedagang</label>
                                     <select class="form-control" name="merchant" id="merchantName" readonly>
-										<option value="<?php echo $r['merchant_id']; ?>" required><?php echo $merchant.' / '.$nick.' / '.$r['merchant_id'].' / '.$lpk; ?></option>
+										<option value="<?php echo $r['merchant_id']; ?>" required><?php echo $merchant.' / '.$nick.' / '.$r['merchant_id'].' / '. (!empty($lpk) ? $lpk : 'Tanpa Lapak'); ?></option>
 											<?php 
 												$sql = mysql_query("select merchant_id, merchant_name, merchant_nick from merchant where merchant_status = 'Aktif' order by merchant_nick, merchant_name");
 												while($d1 = mysql_fetch_array($sql)){
@@ -67,7 +67,7 @@
 													}else{
 														$nick2 = '';
 													} ?>
-												<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk;?></option>
+												<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '. (!empty($lpk) ? $lpk : 'Tanpa Lapak');?></option>
 											<?php } ?>
 									</select>
                                 </div>

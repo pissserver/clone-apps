@@ -7,7 +7,7 @@
 	$merchant 	= executeScalar("select count(merchant_id) from merchant where merchant_status = 'Aktif'");
 	$lapak 		= executeScalar("select count(lapak_id) from lapak");
 	$move 		= executeScalar("select count(move_log_id) from move_log");
-    $payment    = executeScalar("select sum(rent_total) from rent where rent_sts = 'Lunas' and rent_sts2 != 'Batal'");
+    // $payment    = executeScalar("select sum(rent_total) from rent where rent_sts = 'Lunas' and rent_sts2 != 'Batal'");
 
     function headScript(){
 		$headScript=file_get_contents("headScript.html");
@@ -49,7 +49,7 @@
             <div id="page-wrapper">
                 <br><br><br><br>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
@@ -71,7 +71,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
                                 <div class="row">
@@ -93,7 +93,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
                                 <div class="row">
@@ -115,7 +115,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <div class="row">
@@ -136,7 +136,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <br>
@@ -145,7 +145,7 @@
                         <ul class="nav nav-tabs nav-justified">
                         <li class="active"><a data-toggle="tab" href="#block" style="background-color: #428bca; color: #ffffff;">Blok & Lapak</a></li>
                         <li><a data-toggle="tab" href="#merchant2" style="background-color: transparent; color: #428bca;">Pedagang</a></li>
-                        <li><a data-toggle="tab" href="#revenue" style="background-color: transparent; color: #428bca;">Pendapatan</a></li>
+                        <!-- <li><a data-toggle="tab" href="#revenue" style="background-color: transparent; color: #428bca;">Pendapatan</a></li> -->
                         </ul>
 
                         <div class="tab-content">
@@ -190,7 +190,7 @@
         </div>
         
         <!-- Modal deadline -->
-        <div class="modal fade" id="modaldl"  name="modaldl" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <!-- <div class="modal fade" id="modaldl"  name="modaldl" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <div class="modal-dialog" style="width: 1000px; margin-top: 80px;">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #428bca; color: #fff; border-radius: 5px 5px 0px 0px; font-size: 20px;">
@@ -209,7 +209,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         
         <!-- jQuery -->
         <script src="js/jquery.js"></script>

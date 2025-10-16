@@ -118,7 +118,7 @@
 												<div class="form-group" style="padding: 0 10px">
 													<label>Cicilan</label>
 													<select class="form-control" name="ins" id="ins" required readonly>
-														<option value="1">Trial Lapak</option>
+														<option value="1">0</option>
 													</select>
 												</div>
 											</div>

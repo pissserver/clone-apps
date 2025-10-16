@@ -266,37 +266,41 @@
             function clearNotif(){$("#notifArea").html("");}
         </script>
         <script>
-            function animateValue(id, start, end, duration, isCurrency = false) {
-                if (end === 0) {
-                    document.getElementById(id).innerHTML = 0;
-                    return;
+        function animateValue(id, start, end, duration, isCurrency = false) {
+            let obj = document.getElementById(id);
+            if (!obj) return;
+
+            end = parseInt(end);
+            if (isNaN(end) || end === 0) {
+                obj.innerHTML = isCurrency ? formatRupiah(0) : 0;
+                return;
+            }
+
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = isCurrency ? formatRupiah(value) : value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
                 }
-                let obj = document.getElementById(id);
-                let range = end - start;
-                let current = start;
-                let increment = end > start ? Math.ceil(range / (duration / 10)) : -1;
-                let stepTime = 10; // Kecepatan update dalam milidetik
-                let timer = setInterval(function () {
-                    current += increment;
-                    if (current >= end) {
-                        current = end;
-                        clearInterval(timer);
-                    }
-                    obj.innerHTML = isCurrency ? formatRupiah(current) : current;
-                }, stepTime);
             }
 
-            function formatRupiah(angka) {
-                return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            }
+            window.requestAnimationFrame(step);
+        }
 
-            $(document).ready(function () {
-                animateValue("merchant", 0, <?php echo $merchant; ?>, 1500);
-                animateValue("lapak", 0, <?php echo $lapak; ?>, 1500);
-                animateValue("move", 0, <?php echo $move; ?>, 1500);
-                animateValue("payment", 0, <?php echo $payment; ?>, 1500, true);
-            });
-        </script>
+        function formatRupiah(angka) {
+            return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        $(document).ready(function () {
+            animateValue("merchant", 0, <?= (int)$merchant ?>, 1500);
+            animateValue("lapak", 0, <?= (int)$lapak ?>, 1500);
+            animateValue("move", 0, <?= (int)$move ?>, 1500);
+        });
+    </script>
         <script>
             $(document).ready(function() {
                 $('.nav-tabs li a').on('click', function() {

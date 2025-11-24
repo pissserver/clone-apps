@@ -18,11 +18,12 @@
 
 	while ($r 	= mysql_fetch_array($edit)){
 		$tarif			= 0;
+		$tarif1			= 0;
 		$cost_mitra		= 0;
 		$jenis			= mb_substr($r['merchant_id'], 0, 1, 'utf-8');
 		$merchant 		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 		$nick	 		= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
-		$lid 			= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."'");
+		$lid 			= executeScalar("select lapak_id from rent where merchant_id = '".$r['merchant_id']."' and (rent_sts != 'Batal' and rent_sts2 not in ('Batal', 'Pindah'))");
 		$lpk 			= executeScalar("select lapak_name from lapak where lapak_id = '".$lid."'");
 		$goods 			= executeScalar("select goods_name from goods where goods_id='".$r['goods_id']."'");
 		$status 		= executeScalar("select weighing_sts from weighing where weighing_id = '".$id."'");
@@ -284,20 +285,39 @@
 													required disabled>                  
 											</div>
 
+											
+											<?php
+												$sameMerchant = executeScalar("select merchant_id from weighing where reffer = '".$id."'");
+											?>
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
 												<label>Nopol</label>
-												<input type="text" class="form-control" id="nopol" name="nopol" value="<?php echo $r['nopol']; ?>" required <?php echo $c != NULL ? 'disabled' : ''; ?>>                  
+												<?php 
+													if($sameMerchant === $r['merchant_id'] && $c == NULL) { ?>
+														<p style="color: red; font-size: 11px; display: inline-block;">*Nopol utama saat dipecah</p>
+													<?php }
+												?>
+												<input type="text" class="form-control" id="nopol" name="nopol" value="<?php echo $r['nopol']; ?>" required <?php echo ($sameMerchant === $r['merchant_id'] || $c != NULL) ? 'disabled' : ''; ?>>  
+												
+												<?php if ($sameMerchant === $r['merchant_id'] || $c != NULL): ?>
+													<!-- Hidden input agar value tetap terkirim -->
+													<input type="hidden" name="nopol" value="<?php echo $r['nopol']; ?>">
+												<?php endif; ?>
 											</div>
 
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
 												<label>Pedagang</label>
-												<select class="form-control <?php echo $c != NULL ? '' : 'chzn-select'; ?> " name="merchant" id="merchant" <?php echo $c != NULL ? 'disabled' : ''; ?>>
-													<option value="<?php echo $r['merchant_id']; ?>" required><?php echo $merchant.' / '.$nick.' / '.$r['merchant_id'].' / '.$lpk; ?></option>
+												<?php 
+													if($sameMerchant === $r['merchant_id'] && $c == NULL) { ?>
+														<p style="color: red; font-size: 11px; display: inline-block;">*Pedagang utama saat dipecah</p>
+													<?php }
+												?>
+												<select class="form-control <?php echo ($sameMerchant === $r['merchant_id'] || $c != NULL) ? '' : 'chzn-select'; ?> " name="merchant" id="merchant" <?php echo ($sameMerchant === $r['merchant_id'] || $c != NULL) ? 'disabled' : ''; ?>>
+													<option value="<?php echo $r['merchant_id']; ?>" required><?php echo $merchant.' / '.$nick.' / '.$r['merchant_id'].' / '.($lpk ? $lpk : 'Tidak Ada Lapak'); ?></option>
 													<?php 
 													$sql = mysql_query("select merchant_id, merchant_name, merchant_nick from merchant where merchant_status = 'Aktif' order by merchant_nick, merchant_name");
 													while($d1 = mysql_fetch_array($sql)){
 														$lpk2 	= executeScalar("select l.lapak_name from rent r, lapak l 
-														where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."' limit 1");
+														where r.lapak_id = l.lapak_id and r.merchant_id = '".$d1['merchant_id']."' and (r.rent_sts != 'Batal' and r.rent_sts2 not in ('Batal', 'Pindah')) limit 1");
 														$nick2	= $d1['merchant_nick'];
 														if($nick2!=''){
 															$nick2 = $nick2.' / ';
@@ -305,9 +325,14 @@
 															$nick2 = '';
 														}
 													?>
-													<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick2.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.$lpk2;?></option>
+													<option value="<?php echo $d1['merchant_id'];?>"><?php echo $nick2.$d1['merchant_name'].' / '.$d1['merchant_id'].' / '.($lpk2 ? $lpk2 : 'Tidak Ada Lapak');?></option>
 												<?php } ?>
 												</select>
+
+												<?php if ($sameMerchant === $r['merchant_id'] || $c != NULL): ?>
+													<!-- Hidden input agar value merchant tetap terkirim -->
+													<input type="hidden" name="merchant" value="<?php echo $r['merchant_id']; ?>">
+												<?php endif; ?>
 											</div>
 
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
@@ -317,7 +342,12 @@
 
 											<div class="form-group" style="padding:10px; margin-top:-10px; margin-left:5px;">
 												<label>Barang</label>
-												<select class="form-control <?php echo $c != NULL ? '' : 'chzn-select'; ?>" name="goods" id="goods" <?php echo $c != NULL ? 'disabled' : ''; ?> required>
+												<?php 
+													if($sameMerchant === $r['merchant_id'] && $c == NULL) { ?>
+														<p style="color: red; font-size: 11px; display: inline-block;">*Barang utama saat dipecah</p>
+													<?php }
+												?>
+												<select class="form-control <?php echo ($sameMerchant === $r['merchant_id'] || $c != NULL) ? '' : 'chzn-select'; ?>" name="goods" id="goods" <?php echo ($sameMerchant === $r['merchant_id'] || $c != NULL) ? 'disabled' : ''; ?> required>
 													<option value="<?php echo $r['goods_id']; ?>" required><?php echo $goods; ?></option>
 													<?php
 														$sql 		= mysql_query("select goods_id, goods_name from goods order by goods_name");
@@ -326,6 +356,11 @@
 														<option value="<?php echo $data['goods_id'];?>"><?php echo $data['goods_name'];?></option>
 													<?php } ?>
 												</select>
+
+												<?php if ($sameMerchant === $r['merchant_id'] || $c != NULL): ?>
+													<!-- Hidden input agar value goods tetap terkirim ke backend -->
+													<input type="hidden" name="goods" value="<?php echo $r['goods_id']; ?>">
+												<?php endif; ?>
 											</div>
 										</div>
 
@@ -474,8 +509,8 @@
 													}
 													//Jika Belum Diprint Dan Belum Dicheck
 													elseif($c==NULL){
-														echo '<button type="button" class="btn btn-block btn-outline btn-primary" data-toggle="modal" data-target="#confirmationModal">
-															Simpan
+														echo '<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#confirmationModal">
+															<i class="fa fa-floppy-o fa-fw"></i>&nbsp;Simpan
 														</button> ';
 													}
 												?> 
@@ -989,7 +1024,7 @@
 							</fieldset>
 							<br />
 							<div class="col-md-12">
-								<button style="" type="submit" class="btn btn-block btn-outline btn-primary">Simpan</button>
+								<button style="" type="submit" class="btn btn-block btn-primary"><i class="fa fa-floppy-o fa-fw"></i>&nbsp;Simpan</button>
 							</div>
 						</form>
 					</div>
@@ -1415,7 +1450,7 @@
 					?>
 					
 					<br />
-					<button onclick="submitMerge()" class="btn btn-block btn-outline btn-primary">Gabungkan</button>
+					<button onclick="submitMerge()" class="btn btn-block btn-primary"><i class="fa fa-object-group"></i>&nbsp;Gabungkan</button>
 				</div>
 				<div class="modal-footer">
 				</div>
@@ -1427,8 +1462,8 @@
 	<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header" >
-					<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI !</b></h5>
+				<div class="modal-header bg-primary" >
+					<h5 class="modal-title" id="confirmationModalLabel"><b>KONFIRMASI SIMPAN</b></h5>
 					<button type="button" style="margin-top: -20px;" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

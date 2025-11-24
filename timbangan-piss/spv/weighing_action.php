@@ -16,7 +16,7 @@
 	// $checker	= -1;
 	// $id			= $_GET['id'];
 	// $checker    = executeScalar("select checker_id from weighing where weighing_id = '".$id."'");
-	$checker    = $_POST['checker'];
+	$checker = isset($_POST['checker']) ? $_POST['checker'] : null;
 
 	//Spv Masuk
 	if($task=='in'){
@@ -215,6 +215,24 @@
 					$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 				}//ambil tarif miniman timbangan
 				$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+
+				$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+				// $jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$total1 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$total1 = 0;
+					// }
+				}
 				
 				//jika berat masuk & keluar tidak valid bm <= 0 
 				if($in==0||$in=='0'||$out==0||$out=='0'){
@@ -231,7 +249,7 @@
 				$total2	= $netto*$tonase1;
 				
 				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
+				if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 					$total1 = $total1;
 				}
 				else{
@@ -245,24 +263,6 @@
 					$_SESSION['message'] = "Berat Keluar Salah";
 					echo "<script>window.history.back()</script>";
 						exit();
-				}
-
-				$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
-				$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
-				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-				if ($kat_merchant == 'Trial Lapak') { 
-					$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-					if ($jml_kehadiran_hari_ini > 1) {
-						$total1 = 0;
-					}
-				}
-
-				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-				if ($kat_merchant == 'Trial Lapak Jalan') { 
-					$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-					if ($jml_kehadiran_hari_ini > 1) {
-						$total1 = 0;
-					}
 				}
 
 				//update status = batal
@@ -515,6 +515,24 @@
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
+
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		// $jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
 		
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 	= $tonase1+$tonase2;
@@ -536,7 +554,7 @@
 		$total2	= $netto*$tonase1;
 		
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-		if($total1>$tarifmin){
+		if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 			$total1 = $total1;
 		}else{
 			$total1 = $tarifmin;
@@ -611,23 +629,6 @@
 			}
 		}
 
-		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
-		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-		if ($kat_merchant == 'Trial Lapak') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
-
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-		if ($kat_merchant == 'Trial Lapak Jalan') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
 
 		//update weighing
 		$update1 = mysql_query("update weighing 
@@ -703,6 +704,25 @@
 		elseif($jenis=='L'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 		}
+
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		// $jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
+
 		$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 	= $tonase1+$tonase2;
@@ -726,7 +746,7 @@
 	
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
 		//set total bayar
-		if($total1>$tarifmin){
+		if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 			$total1 = $total1;
 		}
 		else{
@@ -754,23 +774,7 @@
 				exit();
 			}
 		}
-		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
-		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-		if ($kat_merchant == 'Trial Lapak') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
 
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-		if ($kat_merchant == 'Trial Lapak Jalan') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
 		$update1 = mysql_query("update weighing set nopol 		= '".$_POST['nopol']."',
 											weight_out			= '".$kir."',
 											netto				= '".$netto."',
@@ -1021,7 +1025,7 @@
 					$_SESSION['success'] = true;
 					$_SESSION['title'] = 'Berhasil';
 					$_SESSION['message'] = "Edit berat masuk kendaraan";
-					echo "<script><script>window.location=('edit1.php')</script>";
+					echo "<script>window.location=('edit1.php')</script>";
 					exit();
 				}else{
 					echo "<script>window.alert('Data log spv gagal Masuk, Silahkan dicoba lagi')</script>;
@@ -2061,7 +2065,11 @@
 			}
 		}
 
-		$update1 	= mysql_query("	update 	weighing 
+
+		// Cek apakah data weighing sudah terbayar atau belum
+		$datePayCheck = executeScalar("SELECT date_pay FROM weighing WHERE weighing_id = '".$id."'");
+		if($datePayCheck == NULL){
+			$update1 	= mysql_query("	update 	weighing 
 									set 	nopol 				= '".$_POST['nopol']."',
 											noncommodity		= '".$nc."',
 											rafaksi				= '".$rafa."',
@@ -2075,12 +2083,38 @@
 											cost				= '".$total1."',
 											cost2				= '".$total2."'
 									where 	weighing_id 		= '".$id."'");
+		} else {
+			$update1 	= mysql_query("	update 	weighing 
+									set 	nopol 				= '".$_POST['nopol']."',
+											noncommodity		= '".$nc."',
+											rafaksi				= '".$rafa."',
+											netto				= '".$netto."',
+											merchant_id			= '".$_POST['merchant']."',
+											goods_id			= '".$_POST['goods']."',
+											cost_tonase			= '".$cost_tonase."',
+											cost_real_tonase	= '".$cost_real_tonase."',
+											cost_bongkar		= '".$cost_bongkar."',
+											cost				= '".$total1."',
+											cost2				= '".$total2."'
+									where 	weighing_id 		= '".$id."'");
+		}
 
-		$update2 = mysql_query("update 	weighing_mitra 
+
+		// Cek apakah data weighing_mitra sudah terbayar atau belum
+		$datePayMitraCheck = executeScalar("SELECT date_pay FROM weighing_mitra WHERE weighing_id = '".$id."'");
+		if ($datePayMitraCheck == NULL) {
+			$update2 = mysql_query("update 	weighing_mitra 
 								set 	date_check 	= '".$dt_now."',
 										merchant_id	= '".$_POST['merchant']."',
 										goods_id	= '".$_POST['goods']."' 
 								where 	weighing_id = '".$id."'");
+		} else {
+			$update2 = mysql_query("update 	weighing_mitra 
+								set 	merchant_id	= '".$_POST['merchant']."',
+										goods_id	= '".$_POST['goods']."' 
+								where 	weighing_id = '".$id."'");
+		}
+		
 		
 		$insert_spv = mysql_query("insert into spv_log (spv_log_id, 
 								spv_user, 
@@ -2115,15 +2149,19 @@
 	}
 	
 	//Input Detail Nonkomodity
-	elseif($task=='detail'){
-		$id		= $_GET['id'];
+	elseif($task == 'detail'){
+		$id	= $_GET['id'];
 		//Ambil Harga Tonase
-		$tonase1 			= 0;
-		$tonase2 			= 0;
-		$tonase3 			= 0;
-		$cost_tonase 		= 0;
-		$cost_real_tonase 	= 0;
-		$cost_bongkar 		= 0;
+		$tonase1 				= 0;
+		$tonase2 				= 0;
+		$tonase3 				= 0;
+		$trfbongkar 			= 0;
+		$trftonase 				= 0;
+		$commodity 				= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
+		$id_merchant 			= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$id_merchant."'");
+		$id_komoditi			= $commodity;
+		$cekseasonalcommodity 	= executeScalar("select count(id_sc) from seasonalcommodity where goods_id = '".$id_komoditi."' AND status_aktif = '1'");
 		
 		//mencari berat barang nonkomoditi berdasarkan id nonkomoditi
 		$nc1	= executeScalar("select noncommodity_weight from noncommodity where noncommodity_id = '".$_POST['weight1']."'");
@@ -2137,11 +2175,10 @@
 		
 		//Jika Jenis pedangang sayur / buar harga berbeda
 		$merchant	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
-		$commodity 	= executeScalar("select goods_id from weighing where weighing_id = '".$id."'");
 		$jenis		= mb_substr($merchant, 0, 1, 'utf-8');
 		if($jenis=='B'){
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '8'");
-			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
+			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '9'");
 			// if($merchant=='B0072'&&$commodity==2){
 			// 	$tonase1 = executeScalar("select pay_total from payment where pay_id = '2'");
 			// }
@@ -2154,7 +2191,28 @@
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$tonase1 = 0;
+			// }
+		}
+
+		if ($cekseasonalcommodity > 0) { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+		}
 		
+		//ambil date tarif tonase yg ada di db
 		
 		$tarifmin 		= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 		= $tonase1+$tonase2;
@@ -2163,6 +2221,7 @@
 		$weight_out		= executeScalar("select weight_out from weighing where weighing_id = '".$id."'");
 		$rafaksi		= executeScalar("select rafaksi from weighing where weighing_id = '".$id."'");
 		$laborer		= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
+		
 		
 		//update table weighing
 		$noncommodity 	= 0;
@@ -2180,7 +2239,7 @@
 		
 		//cek jika berat nonkomodity >= berat netto
 		$netto		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
-		if($noncommodity>=$netto){
+		if($noncommodity >= $netto){
 			echo "<script>window.alert('Berat Nonkomoditi lebih besar dari netto, Tolong Dicek lagi')</script>;
 			<script>window.history.back()</script>";
 			exit();
@@ -2188,35 +2247,38 @@
 		
 		//cari tau apakah id nonkomoditi sudah ada d database
 		$ada	= executeScalar("select count(weighing_id) from weighing_detail where weighing_id='".$id."'");
-		//Jika data nonkomoditi sudah Ada d database (update data)
+		//Jika data nonkomoditi sudah Ada d database (maka update data)
 		if($ada>0){
-			$update = mysql_query("update weighing_detail set noncommodity1 = '".$_POST['weight1']."',
-															count1			= '".$_POST['count1']."',
-															noncommodity2	= '".$_POST['weight2']."',
-															count2			= '".$_POST['count2']."',
-															noncommodity3	= '".$_POST['weight3']."',
-															count3			= '".$_POST['count3']."',
-															noncommodity4	= '".$_POST['weight4']."',
-															count4			= '".$_POST['count4']."',
-															noncommodity5	= '".$_POST['weight5']."',
-															count5			= '".$_POST['count5']."',
-															noncommodity6	= '".$_POST['weight6']."',
-															count6			= '".$_POST['count6']."',
-															noncommodity7	= '".$_POST['weight7']."',
-															count7			= '".$_POST['count7']."',
-															noncommodity8	= '".$_POST['weight8']."',
-															count8			= '".$_POST['count8']."'
-														where weighing_id 	= '".$id."'");
+			$update = mysql_query("	update 	weighing_detail 
+									set 	noncommodity1 = '".$_POST['weight1']."',
+											count1			= '".$_POST['count1']."',
+											noncommodity2	= '".$_POST['weight2']."',
+											count2			= '".$_POST['count2']."',
+											noncommodity3	= '".$_POST['weight3']."',
+											count3			= '".$_POST['count3']."',
+											noncommodity4	= '".$_POST['weight4']."',
+											count4			= '".$_POST['count4']."',
+											noncommodity5	= '".$_POST['weight5']."',
+											count5			= '".$_POST['count5']."',
+											noncommodity6	= '".$_POST['weight6']."',
+											count6			= '".$_POST['count6']."',
+											noncommodity7	= '".$_POST['weight7']."',
+											count7			= '".$_POST['count7']."',
+											noncommodity8	= '".$_POST['weight8']."',
+											count8			= '".$_POST['count8']."'
+									where 	weighing_id 	= '".$id."'");
 			if($update){
 				//Jika nota telah dipecah
+				$noncommodity_value = executeScalar("select noncommodity from weighing where weighing_id = '".$id."'");
 				$sts = executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
 				if($sts=='Pecahan'||$sts=='Gabungan'){
-					$netto		= executeScalar("select netto from weighing where weighing_id = '".$id."'");
 					//Jika ada rafaksi atau tidak
 					if($rafaksi!=0||$rafaksi!=''){
+						$netto 	= $netto+$noncommodity_value+$rafaksi;
 						$netto 	= $netto-$noncommodity-$rafaksi;
 					}
 					else{
+						$netto 	= $netto+$noncommodity_value;
 						$netto 	= $netto-$noncommodity;
 					}
 				}
@@ -2232,45 +2294,35 @@
 				
 				//jika mitra status tidak
 				if($laborer=='Tidak'){
-					$total1				= $netto*$tonase1;
-					$total2				= $netto*$tonase1;
-					$cost_tonase		= $total1;
-					$cost_real_tonase	= $cost_tonase;
-					$cost_tonase		= 0;
+					$total1	= $netto*$tonase1;
+					$total2	= $netto*$tonase1;
 				}
 				else{
-					$total1				= $netto*$tonase3;
-					$total2				= $netto*$tonase3;
-					$cost_tonase		= $netto*$tonase1;
-					$cost_real_tonase	= $cost_tonase;
-					$cost_tonase		= $netto*$tonase2;
+					$total1		= $netto*$tonase1;
+					$trfbongkar	= $netto*$tonase2;
+					$total2		= $netto*$tonase1;
 				}
 				
 				//menghitung netto & total bayar
-				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
-					$total1 = $total1;
-				}
-				else{
-					$total1 = $tarifmin;
-				}
-
-				if($cost_tonase>$tarifmin){
-					$cost_tonase = $cost_tonase;
-				}
-				else{
-					$cost_tonase = $tarifmin;
+				//Jika total bayar dibawah 15.000, maka akan dikenakan tarin min (Rp 15.000)
+				if($jenis != 'B'){
+					if($total1>$tarifmin){
+						$total1 = $total1;
+					}
+					else{
+						$total1 = $tarifmin;
+					}
 				}
 
-				$update2 = mysql_query("update 	weighing 
-										set 	noncommodity 		= '".$noncommodity."',
-												netto				= '".$netto."',
-												cost_tonase			= '".$cost_tonase."',
-												cost_real_tonase	= '".$cost_real_tonase."',
-												cost_bongkar		= '".$cost_bongkar."',
-												cost				= '".$total1."',
-												cost2				= '".$total2."'
-										where 	weighing_id 		= '".$id."'");
+				if ($noncommodity_value == NULL || $noncommodity != $noncommodity_value) {
+					$update2 = mysql_query("update weighing set noncommodity 		= '".$noncommodity."',
+															netto				= '".$netto."',
+															cost_tonase			= '".$total1."',
+															cost_real_tonase	= '".$total2."',
+															cost_bongkar		= '".$trfbongkar."',
+															cost				= '".$total1."',
+															cost2				= '".$total2."'
+														where weighing_id 		= '".$id."'");
 
 				//Insert Log SPV
 				$nopol 		 = executeScalar("select nopol from weighing where weighing_id = '".$id."'");
@@ -2291,15 +2343,20 @@
 														'".$merchant_id."', 
 														'Ada kesalahan pada penginputan data berat nonkomoditi', 
 														'".$dt_now."')");
-				if($update2 && $insert_spv){
+					if($update2 && $insert_spv){
+						echo "<script>window.location=('check_edit.php?id=$id')</script>";
+						exit();
+					}
+					else{
+						echo "<script>window.alert('Data Gagal 1');
+						window.history.back()</script>";
+						exit();
+					}
+				} else {
 					echo "<script>window.location=('check_edit.php?id=$id')</script>";
-					exit();
+						exit();
 				}
-				else{
-					echo "<script>window.alert('Data Gagal 1');
-					window.history.back()</script>";
-					exit();
-				}
+				
 			}
 			else{
 				echo "<script>window.alert('Data Gagal 2');
@@ -2310,17 +2367,42 @@
 		//Jika data nonkomoditi belum Ada d database (insert data)
 		else{
 			//simpan detail nonkomodity
-			$insert = mysql_query("INSERT INTO `weighing_detail` (`weighing_id`, `noncommodity1`, 
-			`count1`, `noncommodity2`, `count2`, `noncommodity3`, `count3`, `noncommodity4`, `count4`, 
-			`noncommodity5`, `count5`, `noncommodity6`, `count6`, `noncommodity7`, `count7`, 
-			`noncommodity8`, `count8`) 
-			VALUES ('".$id."', '".$_POST['weight1']."', '".$_POST['count1']."', '".$_POST['weight2']."', 
-			'".$_POST['count2']."', '".$_POST['weight3']."', '".$_POST['count3']."', '".$_POST['weight4']."', 
-			'".$_POST['count4']."', '".$_POST['weight5']."', '".$_POST['count5']."', '".$_POST['weight6']."', 
-			'".$_POST['count6']."', '".$_POST['weight7']."', '".$_POST['count7']."', '".$_POST['weight8']."', 
-			'".$_POST['count8']."')");
+			$insert = mysql_query("	INSERT INTO `weighing_detail` (	`weighing_id`, 
+																	`noncommodity1`, 
+																	`count1`, 
+																	`noncommodity2`, 
+																	`count2`, 
+																	`noncommodity3`, 
+																	`count3`, 
+																	`noncommodity4`, 
+																	`count4`, 
+																	`noncommodity5`, 
+																	`count5`, 
+																	`noncommodity6`, 
+																	`count6`, 
+																	`noncommodity7`, 
+																	`count7`, 
+																	`noncommodity8`, 
+																	`count8`) 
+									VALUES ('".$id."', 
+											'".$_POST['weight1']."', 
+											'".$_POST['count1']."', 
+											'".$_POST['weight2']."', 
+											'".$_POST['count2']."', 
+											'".$_POST['weight3']."', 
+											'".$_POST['count3']."', 
+											'".$_POST['weight4']."', 
+											'".$_POST['count4']."', 
+											'".$_POST['weight5']."', 
+											'".$_POST['count5']."', 
+											'".$_POST['weight6']."', 
+											'".$_POST['count6']."', 
+											'".$_POST['weight7']."', 
+											'".$_POST['count7']."', 
+											'".$_POST['weight8']."', 
+											'".$_POST['count8']."')");
 			
-			if($insert){
+			if($insert){//jika berhasil menyimpan detail nonkomodity
 				//Jika nota telah dipecah
 				$sts	= executeScalar("select weighing_sts2 from weighing where weighing_id = '".$id."'");
 				if($sts=='Pecahan'||$sts=='Gabungan'){
@@ -2347,77 +2429,69 @@
 				$laborer 	= executeScalar("select laborer_sts from weighing where weighing_id = '".$id."'");
 				//jika mitra status tidak
 				if($laborer=='Tidak'){
-					$total1				= $netto*$tonase1;
-					$total2				= $netto*$tonase1;
-					$cost_tonase		= $total1;
-					$cost_real_tonase	= $cost_tonase;
-					$cost_bongkar		= 0;
-				}else{
-					$total1				= $netto*$tonase3;
-					$total2				= $netto*$tonase3;
-					$cost_tonase		= $netto*$tonase1;
-					$cost_real_tonase	= $cost_tonase;
-					$cost_bongkar		= $netto*$tonase2;
+					$total1	= $netto*$tonase1;
+					$total2	= $netto*$tonase1;
+				}
+				else{
+					$total1		= $netto*$tonase1;
+					$trfbongkar	= $netto*$tonase2;
+					$total2		= $netto*$tonase1;
 				}
 				
 				//menghitung netto & total bayar
-				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
-					$total1 = $total1;
-				}
-				else{
-					$total1 = $tarifmin;
-				}
-
-				if($cost_tonase>$tarifmin){
-					$cost_tonase = $cost_tonase;
-				}
-				else{
-					$cost_tonase = $tarifmin;
+				// Jika pedagang yg datang bukan pedagang buah maka ada pengecekan tarif min. 
+				if($jenis != 'B'){
+					//Jika total bayar dibawah tarif min, maka akan dikenakan tarif min
+					if($total1>$tarifmin){
+						$total1 = $total1;
+					}
+					else{
+						$total1 = $tarifmin;
+					}
 				}
 				
 				//Update Tabel detail timbangan
-				$update = mysql_query("	update weighing 
-										set noncommodity 		= '".$noncommodity."',
-											netto				= '".$netto."',
-											cost_tonase			= '".$cost_tonase."',
-											cost_real_tonase	= '".$cost_real_tonase."',
-											cost_bongkar		= '".$cost_bongkar."',
-											cost				= '".$total1."',
-											cost2				= '".$total2."'
-										where weighing_id 		= '".$id."'");
+				$update = mysql_query("	update 	weighing 
+										set 	noncommodity 		= '".$noncommodity."',
+												netto				= '".$netto."',
+												cost_tonase			= '".$total1."',
+												cost_real_tonase	= '".$total2."',
+												cost_bongkar		= '".$trfbongkar."',
+												cost				= '".$total1."',
+												cost2				= '".$total2."'
+										where 	weighing_id 		= '".$id."'");
 
 				//Insert Log SPV
 				$nopol 		 = executeScalar("select nopol from weighing where weighing_id = '".$id."'");
 				$merchant_id = executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 				$insert_spv = mysql_query("insert into spv_log (spv_log_id, 
-										spv_user, 
-										spv_action, 
-										spv_target, 
-										spv_nopol, 
-										spv_merchant_id, 
-										spv_reason, 
-										action_time) 
-									values (	'', 
-										'".$name."', 
-										'Menginputkan Berat NonKomoditi Sebesar -> ".$noncommodity." Kg',
-										'".$id."', 
-										'".$nopol."', 
-										'".$merchant_id."', 
-										'Ada kesalahan pada penginputan data berat nonkomoditi', 
-										'".$dt_now."')");
-				if($update && $insert_spv){
+														spv_user, 
+														spv_action, 
+														spv_target, 
+														spv_nopol, 
+														spv_merchant_id, 
+														spv_reason, 
+														action_time) 
+													values (	'', 
+														'".$name."', 
+														'Menginputkan Berat NonKomoditi Sebesar -> ".$noncommodity." Kg',
+														'".$id."', 
+														'".$nopol."', 
+														'".$merchant_id."', 
+														'Ada kesalahan pada penginputan data berat nonkomoditi', 
+														'".$dt_now."')");
+				if($update && $insert_spv){//jika berhasil update
 					echo "<script>window.location=('check_edit.php?id=$id')</script>";
 					exit();
 				}
-				else{
+				else{//jika gagal update
 					echo "<script>window.alert('Data Gagal 3');
 					window.history.back()</script>";
 					exit();
 				}
 			}
-			else{
-				echo "<script>window.alert('Data Gagal 4');
+			else{//jika Gagal menyimpan detail nonkomodity
+				echo "<script>window.alert('Gagal Menyimpan Detil Nonkomodity');
 				window.history.back()</script>";
 				exit();
 			}
@@ -3251,7 +3325,7 @@
 							$_SESSION['success'] = true;
 							$_SESSION['title'] = "Berhasil";
 							$_SESSION['message'] = "Pecah data berhasil";
-							echo "<script>window.location=('check.php')</script>";
+							echo "<script>window.location=('check2.php')</script>";
 							exit();
 						}else{
 							echo "<script>window.alert('Data Gagal');
@@ -3398,6 +3472,7 @@
 			}
 		}
 		else{
+			
 			$laborer = 'Ya';
 			// Pengecekan pemilihan tarif berdasarkan jenis merchant
 			if($jenis == 'B'){
@@ -3599,14 +3674,13 @@
 				$cost_bayar 		= intval($cost_bagi_mitra) + intval($cost_simpan_mitra) + intval($cost_bagi_mandor) + intval($cost_simpan_mandor); // Hitung cost simpan mandor
 			}
 
-			
+			$datePayCheck = executeScalar("SELECT date_pay FROM weighing_mitra WHERE weighing_id = '".$id."'");
 			$cek = executeScalar("select count(weighing_id) from laborer_fee where weighing_id = '".$id."'");
 			//$ketemu	= mysql_num_rows($ada);
-			if($cek > 0){
+			if($cek > 0 && $datePayCheck == NULL){
 				mysql_query("delete from weighing_mitra where weighing_id = '".$id."'");
-			}
 
-			$insert = mysql_query("INSERT INTO `weighing_mitra` ( 	`weighing_id`,
+				$insert = mysql_query("INSERT INTO `weighing_mitra` ( 	`weighing_id`,
 																	`merchant_id`,
 																	`checker_id`,
 																	`goods_id`,
@@ -3667,12 +3741,82 @@
 											'".$p1."',
 											'".$p2."')");
 					
-			if(!$insert){
-				//echo 'Data Gagal Masuk';
-				trigger_error("Data gagal Masuk, Silahkan dicoba lagi ".$id, E_USER_ERROR);
-				HEADER("location: index.php");
-				exit();
+				if(!$insert){
+					//echo 'Data Gagal Masuk';
+					trigger_error("Data gagal Masuk, Silahkan dicoba lagi ".$id, E_USER_ERROR);
+					HEADER("location: index.php");
+					exit();
+				}
+			} elseif ($cek == 0) {
+				$insert = mysql_query("INSERT INTO `weighing_mitra` ( 	`weighing_id`,
+																	`merchant_id`,
+																	`checker_id`,
+																	`goods_id`,
+																	`nopol`, 
+																	`weight_in`, 
+																	`weight_out`,  
+																	`noncommodity_id`,
+																	`noncommodity`,
+																	`netto`, 
+																	`date_in`, 
+																	`time_in`,
+																	`date_out`, 
+																	`time_out`,
+																	`laborer_sts`,
+																	`cost_permitra_bagi`,
+																	`cost_permitra_simpan`,
+																	`cost_permandor_bagi`,
+																	`cost_permandor_simpan`,
+																	`cost_bagi_mitra`,
+																	`cost_simpan_mitra`,
+																	`cost_bagi_mandor`,
+																	`cost_simpan_mandor`,
+																	`cost_bayar`,
+																	`cost`,
+																	`weighing_sts`, 
+																	`weighing_sts2`,
+																	`reffer`,
+																	`p1`,
+																	`p2`) 
+									VALUES ('".$id."', 
+											'".$merchant_id."', 
+											'".$checker."',
+											'".$goods_id."',
+											'".$nopol."',
+											'".$weight_in."',
+											'".$weight_out."', 
+											'".$noncommodity_id."',
+											'".$noncommodity."', 
+											'".$netto2."', 
+											'".$date_in."', 
+											'".$time_in."', 
+											'".$date_out."',
+											'".$time_out."',
+											'".$laborer."',
+											'".$k_dibagi."',
+											'".$k_disimpan."',
+											'".$m_dibagi."',
+											'".$m_disimpan."',
+											'".$cost_bagi_mitra."', 
+											'".$cost_simpan_mitra."', 
+											'".$cost_bagi_mandor."', 
+											'".$cost_simpan_mandor."', 
+											'".$cost_bayar."',
+											'".$cost."', 
+											'".$weighing_sts."', 
+											'".$weighing_sts2."',
+											'".$reffer."',
+											'".$p1."',
+											'".$p2."')");
+					
+				if(!$insert){
+					//echo 'Data Gagal Masuk';
+					trigger_error("Data gagal Masuk, Silahkan dicoba lagi ".$id, E_USER_ERROR);
+					HEADER("location: index.php");
+					exit();
+				}
 			}
+
 		}
 		
 		if($jenis != 'B'){
@@ -3719,9 +3863,12 @@
 									cost2				= '".$total2."'
 								where weighing_id 		= '".$id."'");
 							
-		$update2 = mysql_query("update 	weighing_mitra 
+		$datePayCheck = executeScalar("SELECT date_pay FROM weighing_mitra WHERE weighing_id = '".$id."'");
+		if ($datePayCheck == NULL) {
+			$update2 = mysql_query("update 	weighing_mitra 
 								set 	date_check 	= '".$dt_now."'
 								where 	weighing_id = '".$id."'");
+		}
 
 		// Insert SPV LOG
 		$merchant_id 		= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
@@ -3743,7 +3890,7 @@
 									'Ada kesalahan pada penginputan data mitra & mandor', 
 									'".$dt_now."')");
 
-		if($update && $update2 && $insert_spv){
+		if($update && $insert_spv){
 			echo "<script>window.location=('check_edit.php?id=$id')</script>";
 			exit();
 		} else{

@@ -8,7 +8,7 @@
         $sql_details    = array(
             'user' => 'root',
             'pass' => '',
-            'db'   => 'clone_db_piss',
+            'db'   => 'db_piss',
             'host' => 'localhost'
 			// 'user' => 'edo',
             // 'pass' => 'edocakep@007',

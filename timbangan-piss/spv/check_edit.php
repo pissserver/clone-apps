@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include "connection.php";
+	include "../connection.php";
 	include "components/role_session.php";
 
 	function headScript(){
@@ -8,7 +8,7 @@
 		return $headScript;
 	}
 
-	$checker 		= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
+	// $checker 		= executeScalar("select checker_name from checker where checker_code = '".$_SESSION['checker']."'");
 	$id				= $_GET['id'];
 	$edit			= mysql_query("select * from weighing where weighing_id = '".$id."'");
 	$pdg 			= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
@@ -18,6 +18,7 @@
 	while ($r 	= mysql_fetch_array($edit)){
 		$tarif			= 0;
 		$cost_mitra		= 0;
+		$tarif1			= 0;
 		$jenis			= mb_substr($r['merchant_id'], 0, 1, 'utf-8');
 		$merchant 		= executeScalar("select merchant_name from merchant where merchant_id = '".$r['merchant_id']."'");
 		$nick	 		= executeScalar("select merchant_nick from merchant where merchant_id = '".$r['merchant_id']."'");
@@ -206,7 +207,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="icon" href="../img/icon.png">
-    <link rel="shortcut icon" href="../img/icon.png" />
+	<link rel="shortcut icon" href="../img/icon.png" />
     <title>Detail Data Tagihan | PISS</title>
 	<?php echo headScript(); ?>
 </head>
@@ -217,11 +218,11 @@
         <div id="page-wrapper">
 			<div class="row">
                 <div class="col-lg-12">
-					<br /><br>
+					<br /><br><br><br>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
 							<div class="row">
-								<div class="col-md-9" style="margin-top: 20px;">
+								<div class="col-md-9" style="margin-top: 13px;">
 									<?php if ($c == NULL) { ?>
 										<i class="fa fa-square-o fa-fw"></i>
 									<?php } else { ?>
@@ -231,10 +232,10 @@
 								</div>
 
 								<form method="GET" action="check_edit_search.php">
-									<div class="col-md-2" style="margin-top: 10px;">
+									<div class="col-md-2" style="margin-top: 5px;">
 										<input type="search" class="form-control" id="search" name="search_id" placeholder="Cari No Nota" value="" required>
 									</div>
-									<button type="submit" class="btn btn-primary" style="border: 1px solid #fff; margin-top: 10px;">Cari</button>
+									<button type="submit" class="btn btn-primary" style="border: 1px solid #fff; margin-top: 5px;">Cari</button>
 								</form>
 							</div>
                         </div>
@@ -472,8 +473,8 @@
 											</div>
 										</div>
 										<div class="form-group" style="padding:10px; margin-right:20px; margin-left: 20px; margin-top:30px;">
-											<button type="button" id="btnModal" class="btn btn-block btn-outline btn-primary">
-												Simpan
+											<button type="button" id="btnModal" class="btn btn-block btn-primary">
+												<i class="fa fa-floppy-o"></i>&nbsp;&nbsp;Simpan
 											</button> 
 										</div>
 									</div>
@@ -743,7 +744,8 @@
 							<?php } elseif ($c!=NULL) { ?>
 								<?php if ($r['p2'] == NULL) { ?>
 									<div class="form-group">
-										<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id.'&u='.$checker;?>" target="_blank">
+										<!-- <a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id.'&u='.$checker;?>" target="_blank"> -->
+										<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id;?>" target="_blank">
 											<button type="button" class="btn btn-block btn-outline btn-danger" onclick="postAndReload()"> 
 												<i class="fa fa-close"></i>&nbsp;Nota Tagihan Tonase
 											</button>
@@ -751,7 +753,8 @@
 									</div>
 								<?php } elseif ($r['p2'] != NULL) { ?>
 									<div class="form-group">
-										<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id.'&u='.$checker;?>" target="_blank">
+										<!-- <a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id.'&u='.$checker;?>" target="_blank"> -->
+										<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan.php?id=<?php echo $id;?>" target="_blank">
 											<button type="button" class="btn btn-block btn-outline btn-success" onclick="postAndReload()"> 
 												<i class="fa fa-check"></i>&nbsp;Nota Tagihan Tonase
 											</button>
@@ -767,7 +770,9 @@
 											echo '';//Print Nota Tagihan Mitra
 										}
 										else{
-											echo '<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan_mitra.php?id='.$id.'&u='.$checker.'" target="_blank">
+											echo 
+											// '<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan_mitra.php?id='.$id.'&u='.$checker.'" target="_blank">
+											'<a style="text-decoration:none;" href="../htmltopdf/nota_tagihan_mitra.php?id='.$id.'" target="_blank">
 												<button type="button" class="btn btn-block btn-outline btn-primary">
 													Nota Tagihan Mitra
 												</button>
@@ -1011,7 +1016,7 @@
 							</fieldset>
 							<br />
 							<div class="col-md-12">
-								<button style="" type="submit" class="btn btn-block btn-outline btn-primary">Simpan</button>
+								<button style="" type="submit" class="btn btn-block btn-primary"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;Simpan</button>
 							</div>
 						</form>
 					</div>
@@ -1459,7 +1464,7 @@
 					?>
 					
 					<br />
-					<button onclick="submitMerge()" class="btn btn-block btn-outline btn-primary">Gabungkan</button>
+					<button onclick="submitMerge()" class="btn btn-block btn-primary"><i class="fa fa-object-group"></i>&nbsp;&nbsp;Gabungkan</button>
 				</div>
 				<div class="modal-footer">
 				</div>

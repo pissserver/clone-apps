@@ -11,7 +11,32 @@
 		return $headScript;
 	}
 	
+
+	$countRevisionAcc = executeScalar("SELECT COUNT(revision_id) FROM revision WHERE status1 = 'Disetujui' AND status2 IS NULL");
+	// $countRevisionReject = executeScalar("SELECT COUNT(revision_id) FROM revision WHERE status1 = 'Ditolak' AND status2 IS NULL");
 ?>
+
+<style>
+	.notification-wrapper {
+		position: relative;
+	}
+	
+	.notification-revision {
+        display: block;
+        position: absolute;
+        right: 10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 10px;
+    }
+
+	.notification-revision-hidden {
+		display: none;
+	}
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +47,7 @@
     <meta name="author" content="">
 	<link rel="icon" href="img/icon.png">
     <link rel="shortcut icon" href="img/icon.png" />
-    <title>Developer | PISS</title>
+    <title>Revisi | PISS</title>
 	<?php echo headScript(); ?>
 </head>
 <body>
@@ -32,11 +57,11 @@
         <div id="page-wrapper">
 			<div class="row">
 				<br /><br><br><br>
-				<div style="margin: 0px 15px;" class="alert alert-danger" role="alert">
-					<i class="fa fa-warning" style="display: inline-block;"></i>&nbsp;
-					<p style="font-size: 14px; display: inline-block">
-						Halaman ini hanya dipergunakan untuk melakukan revisi data timbangan salah. Tolong jangan disalah gunakan, Terima kasih!
-					</p>
+				<div class="alert alert-warning d-flex align-items-center" role="alert" style="margin: 0 15px;">
+					<i class="fa fa-warning me-2" style="font-size: 18px;"></i>
+					<span style="font-size: 14px;">
+						Jika melakukan pengajuan revisi tolong pada pengisian <b>"Uraian Revisi"</b> dan <b>"Alasan Revisi"</b> diisi dengan jelas dan lengkap agar proses revisi dapat berjalan dengan lancar. Terima kasih.
+					</span>
 				</div>
 			</div>
 			<br>
@@ -86,7 +111,7 @@
 										</div>
 										<div class="col-md-12">
 											<div class="form-group" style="padding:10px 15px; margin-bottom:-10px;">
-												<center><button type="submit" class="btn btn-primary btn-block">Pengajuan <i class="fa fa-angle-double-right fa-lg"></i></button></center>
+												<center><button type="submit" class="btn btn-primary btn-block"><i class="fa fa-paper-plane "></i>&nbsp;&nbsp;Pengajuan</button></center>
 											</div>
 										</div>
 									</fieldset>
@@ -103,16 +128,30 @@
                     <ul class="nav nav-tabs nav-justified">
                         <li class="active">
                             <a data-toggle="tab" href="#revisi"
-                                style="background-color: #428bca; color: #ffffff;">Pengajuan Revisi</a>
+                                style="background-color: #428bca; color: #ffffff;">Pengajuan Revisi </a>
                         </li>
                         <li>
+							<?php 
+								if ($countRevisionAcc != 0) {
+									echo '<span class="notification-revision">' . $countRevisionAcc . '</span>';
+								} else {
+									echo '<span class="notification-revision-hidden"></span>';
+								}
+							?>
                             <a data-toggle="tab" href="#accept"
-                                style="background-color: transparent; color: #428bca;">Revisi Disetujui</a>
+                                style="background-color: transparent; color: #428bca;">Revisi Disetujui <span></span></a>
                         </li>
-                        <li>
+                        <!-- <li>
+							<?php 
+								if ($countRevisionReject != 0) {
+									echo '<span class="notification-revision">' . $countRevisionReject . '</span>';
+								} else {
+									echo '<span class="notification-revision-hidden"></span>';
+								}
+							?>
                             <a data-toggle="tab" href="#reject"
-                                style="background-color: transparent; color: #428bca;">Revisi Ditolak</a>
-                        </li>
+                                style="background-color: transparent; color: #428bca;">Revisi Ditolak <span></span></a>
+                        </li> -->
                     </ul>
 
                     <div class="tab-content">
@@ -125,7 +164,7 @@
 											<i class="fa fa-spinner fa-fw"></i> Data Pengajuan Revisi
 										</div>
 										<div class="panel-body">
-											<div class="row">
+											<div class="row" style=" overflow-x: auto;">
 												<div class="col-md-12">
 													<?php 
 														$query 	= mysql_query("SELECT * FROM revision WHERE status1 IS NULL ORDER BY revision_id DESC");
@@ -160,7 +199,7 @@
 											<i class="fa fa-check-square fa-fw"></i> Data Revisi Disetujui
 										</div>
 										<div class="panel-body">
-											<div class="row">
+											<div class="row" style=" overflow-x: auto;">
 												<div class="col-md-12">
 													<?php 
 														$query 	= mysql_query("SELECT * FROM revision WHERE status1 = 'Disetujui' ORDER BY revision_id DESC");
@@ -195,7 +234,7 @@
 											<i class="fa fa-close fa-fw"></i> Data Revisi Ditolak
 										</div>
 										<div class="panel-body">
-											<div class="row">
+											<div class="row" style=" overflow-x: auto;">
 												<div class="col-md-12">
 													<?php 
 														$query 	= mysql_query("SELECT * FROM revision WHERE status1 = 'Ditolak' ORDER BY revision_id DESC");
@@ -235,6 +274,15 @@
 		</div>
 	</div>
 
+	<!-- Modal Edit -->
+	<div id="modalEditRevision" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Meload modal "developer_modal.php" file -->
+            </div>
+        </div>
+    </div>
+
 	<!-- Modal Password -->
 	<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
 		<div class="modal-dialog">
@@ -254,6 +302,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script>
 		$(document).ready(function(){
 			$("#notifArea").html(alertLoadProcess);

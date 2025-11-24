@@ -144,7 +144,7 @@
 	</table>
 	<?php } ?>
 	<br/>
-	<!-- <table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt;width:300px;margin-right:0px;" id="tbMitraMandor">
+	<table style="border: solid 1px black; border-collapse: collapse; margin-bottom: 5px;font-size:9pt;width:300px;margin-right:0px;" id="tbMitraMandor">
 		<tr style="border: 1px black;">
 			<th style="text-align: left;width: 75%; border: solid 1px black; text-align:center;">Mitra</th>
 			<th style="text-align: left;width: 25%;border: solid 1px black; text-align:center;">Mandor</th>
@@ -153,7 +153,7 @@
 			<td style="border: solid 1px black;"><br/><br/><br/></td>
 			<td style="border: solid 1px black;"></td>
 		</tr>
-	</table> -->
+	</table>
 	<br/>
 	<table style="border-collapse: collapse; margin-bottom: 5px;font-size:7pt;width:300px;margin-right:0px;" id="tableTtd">
 		<tr>

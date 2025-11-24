@@ -635,6 +635,22 @@
 			if ($cekseasonalcommodity > 0) { 
 				$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
 			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+			if ($kat_merchant == 'Trial Lapak') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
+			}
+
+			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+			if ($kat_merchant == 'Trial Lapak Jalan') { 
+				$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+				// if ($jml_kehadiran_hari_ini > 1) {
+				// 	$total1 = 0;
+				// }
+			}
 			
 			$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 			$tonase3 	= $tonase1 + $tonase2;
@@ -660,27 +676,11 @@
 			//set total bayar
 			if($jenis != 'B'){
 				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
+				if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 					$total1 = $total1;
 				}else{
 					$total1 = $tarifmin;
 				}
-			}
-
-			// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-			if ($kat_merchant == 'Trial Lapak') { 
-				$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-				// if ($jml_kehadiran_hari_ini > 1) {
-				// 	$total1 = 0;
-				// }
-			}
-
-			// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-			if ($kat_merchant == 'Trial Lapak Jalan') { 
-				$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-				// if ($jml_kehadiran_hari_ini > 1) {
-				// 	$total1 = 0;
-				// }
 			}
 
 			//Cek Berat Keluar
@@ -959,6 +959,24 @@
 					$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 				}//ambil tarif miniman timbangan
 				$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+
+				$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+				// $jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+				if ($kat_merchant == 'Trial Lapak') { 
+					$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$total1 = 0;
+					// }
+				}
+
+				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+				if ($kat_merchant == 'Trial Lapak Jalan') { 
+					$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+					// if ($jml_kehadiran_hari_ini > 1) {
+					// 	$total1 = 0;
+					// }
+				}
 				
 				//jika berat masuk & keluar tidak valid bm <= 0 
 				if($in==0||$in=='0'||$out==0||$out=='0'){
@@ -975,7 +993,7 @@
 				$total2	= $netto*$tonase1;
 				
 				//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-				if($total1>$tarifmin){
+				if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 					$total1 = $total1;
 				}
 				else{
@@ -991,23 +1009,6 @@
 						exit();
 				}
 
-				$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
-				$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
-				// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-				if ($kat_merchant == 'Trial Lapak') { 
-					$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-					if ($jml_kehadiran_hari_ini > 1) {
-						$total1 = 0;
-					}
-				}
-
-				// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-				if ($kat_merchant == 'Trial Lapak Jalan') { 
-					$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-					if ($jml_kehadiran_hari_ini > 1) {
-						$total1 = 0;
-					}
-				}
 
 				//update status = batal
 				elseif($in==$out){
@@ -1238,6 +1239,7 @@
 	//Keluar Manual
 	elseif($task=='out2'){
 		$id		= $_GET['id'];
+		$weightout 	= $_POST['weight_out'];
 		$reason = $_POST['reason'];
 		$netto	= 0;
 		$total1	= 0;
@@ -1246,7 +1248,11 @@
 		$tonase3 	= 0;
 		$tonase1 	= 0;
 		$noncommodity = executeScalar("select noncommodity from weighing where weighing_id = '".$id."'");
-		
+		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
+		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
+		$weight_in 	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
+		// $jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
+
 		//Jika Jenis pedangang sayur / buar harga berbeda
 		$jenis	= mb_substr($_POST['merchant'], 0, 1, 'utf-8');
 		if($jenis=='B'){
@@ -1264,11 +1270,29 @@
 			$tonase1 	= executeScalar("select pay_total from payment where pay_id = '2'");
 			$tonase2 	= executeScalar("select pay_total from payment where pay_id = '3'");
 		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
+		if ($kat_merchant == 'Trial Lapak') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '15'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
+		if ($kat_merchant == 'Trial Lapak Jalan') { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '16'");
+			// if ($jml_kehadiran_hari_ini > 1) {
+			// 	$total1 = 0;
+			// }
+		}
+
+		// Pengecekan apabila buah yang dimasukkan termasuk buah khusus
+		if ($cekseasonalcommodity > 0) { 
+			$tonase1 = executeScalar("select pay_total from payment where pay_id = '14'");
+		}
 		
-		$tarifmin 	= executeScalar("select pay_total from payment where pay_id = '1'");
 		$tonase3 	= $tonase1+$tonase2;
-		$weight_in 	= executeScalar("select weight_in from weighing where weighing_id = '".$id."'");
-		$weightout 	= $_POST['weight_out'];
 		
 		//Jika berat keluar = 0
 		if($weightout==0||$weightout=='0'){
@@ -1285,7 +1309,7 @@
 		$total2	= $netto*$tonase1;
 		
 		//Jika total bayar dibawah 10.000, maka akan dikenakan tarin min (Rp 10.000)
-		if($total1>$tarifmin){
+		if($total1>$tarifmin || $kat_merchant == 'Trial Lapak Jalan'){
 			$total1 = $total1;
 		}else{
 			$total1 = $tarifmin;
@@ -1368,23 +1392,6 @@
 			}
 		}
 
-		$kat_merchant 			= executeScalar("select kat_merchant from merchant where merchant_id = '".$_POST['merchant']."'");
-		$jml_kehadiran_hari_ini = executeScalar("select count(weighing_id) from weighing where merchant_id = '".$_POST['merchant']."' AND weighing_sts != 'Batal' AND date_in = '".date("Y-m-d")."' ");
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak
-		if ($kat_merchant == 'Trial Lapak') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '15'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
-
-		// Pengecekan apabila pedagang merupakan pedagang trial di lapak di jalan
-		if ($kat_merchant == 'Trial Lapak Jalan') { 
-			$total1 = executeScalar("select pay_total from payment where pay_id = '16'");
-			if ($jml_kehadiran_hari_ini > 1) {
-				$total1 = 0;
-			}
-		}
 
 		//update weighing
 		$update1 = mysql_query("update weighing 
@@ -1893,7 +1900,7 @@
 					$nopol 		 	= executeScalar("select nopol from weighing where weighing_id = '".$id."'");
 					$merchant_id 	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 					$name 		   	= executeScalar("select checker_name from checker where checker_id = '".$checker."'");
-					$insert_spv 	= mysql_query("insert into cashier_log (cashier_log_id, 
+					$insert_cashier 	= mysql_query("insert into cashier_log (cashier_log_id, 
 																						cashier_user, 
 																						cashier_action, 
 																						cashier_target, 
@@ -1907,7 +1914,7 @@
 																						'".$nopol."', 
 																						'".$merchant_id."',
 																						'".$dt_now."')");
-					if($update2 && $insert_spv){
+					if($update2 && $insert_cashier){
 						echo "<script>window.location=('check_edit.php?id=$id')</script>";
 						exit();
 					}
@@ -2028,7 +2035,7 @@
 				$nopol 		 = executeScalar("select nopol from weighing where weighing_id = '".$id."'");
 				$merchant_id = executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 				$name 		   	= executeScalar("select checker_name from checker where checker_id = '".$checker."'");
-				$insert_spv 	= mysql_query("insert into cashier_log (cashier_log_id, 
+				$insert_cashier 	= mysql_query("insert into cashier_log (cashier_log_id, 
 												cashier_user, 
 												cashier_action, 
 												cashier_target, 
@@ -2042,7 +2049,7 @@
 												'".$nopol."', 
 												'".$merchant_id."',
 												'".$dt_now."')");
-				if($update && $insert_spv){//jika berhasil update
+				if($update && $insert_cashier){//jika berhasil update
 					echo "<script>window.location=('check_edit.php?id=$id')</script>";
 					exit();
 				}
@@ -2335,6 +2342,7 @@
 			$n8			= $_POST['n8'];
 			$n9			= $_POST['n9'];
 			$n10		= $_POST['n10'];
+			$id_merchant= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 			$merchant	= executeScalar("select merchant_id from weighing where weighing_id = '".$id."'");
 			
 			//Cek pecah nota harus minimal 2 pedagang
@@ -3193,7 +3201,7 @@
 							$_SESSION['success'] = true;
 							$_SESSION['title'] = "Berhasil Pecah Data";
 							$_SESSION['message'] = "Anda bisa cek data yang telah dipecah";
-							echo "<script>window.location=('check.php')</script>";
+							echo "<script>window.location=('check2.php')</script>";
 							exit();
 						}else{
 							echo "<script>window.alert('Data Gagal');

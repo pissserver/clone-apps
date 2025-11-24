@@ -19,14 +19,37 @@
 			<tr>
 				<td style="border: none;">
 					<b>Password Lama</b><br>
-					<input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass" name="pass" placeholder="Password Lama"/>
+					<div class="password-wrapper" style="margin-top:5px;">
+						<input type="password" class="form-control" id="pass" name="pass" placeholder="Password Lama" />
+						<button type="button" class="toggle-password" onclick="togglePassword('pass', this)">
+							<i class="fa fa-eye-slash text-primary"></i>
+						</button>
+					</div>
 				</td>
 			</tr>
+			<!-- Password Baru -->
 			<tr>
 				<td style="border: none;">
 					<b>Password Baru</b><br>
-					<p><input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass1" name="pass1" placeholder="Password Baru"/></p><br />
-					<p><input style="margin-top: 5px;" type="password" class="col-lg-10 form-control" id="pass2" name="pass2" placeholder="Ulangi Password Baru"/></p>
+					<div class="password-wrapper" style="margin-top:5px;">
+						<input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password Baru" />
+						<button type="button" class="toggle-password" onclick="togglePassword('pass1', this)">
+							<i class="fa fa-eye-slash text-primary"></i>
+						</button>
+					</div>
+				</td>
+			</tr>
+
+			<!-- Ulangi Password Baru -->
+			<tr>
+				<td style="border: none;">
+					<b>Ulangi Password Baru</b><br>
+					<div class="password-wrapper" style="margin-top:5px;">
+						<input type="password" class="form-control" id="pass2" name="pass2" placeholder="Ulangi Password Baru" />
+						<button type="button" class="toggle-password" onclick="togglePassword('pass2', this)">
+							<i class="fa fa-eye-slash text-primary"></i>
+						</button>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -38,3 +61,20 @@
 	</table>
 </form>
 <?php } ?>
+
+<script>
+	function togglePassword(id, btn) {
+		const input = document.getElementById(id);
+		const icon = btn.querySelector('i');
+
+		if (input.type === "password") {
+			input.type = "text";
+			icon.classList.remove("fa-eye-slash");
+			icon.classList.add("fa-eye");
+		} else {
+			input.type = "password";
+			icon.classList.remove("fa-eye");
+			icon.classList.add("fa-eye-slash");
+		}
+	}
+</script>

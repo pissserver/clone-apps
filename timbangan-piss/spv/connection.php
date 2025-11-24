@@ -2,7 +2,7 @@
 	$server 	= "localhost";
 	$username 	= "root";
 	$password 	= "";
-	$database 	= "clone_db_piss";
+	$database 	= "db_piss";
 	// $server 	= "192.168.1.46";
 	// $username 	= "edo";
 	// $password 	= "edocakep@007";

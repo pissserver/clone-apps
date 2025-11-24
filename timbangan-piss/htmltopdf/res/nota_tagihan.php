@@ -24,7 +24,7 @@
         $jam 			= date("H:i");
         $dt_now			= date("Y-m-d H:i:s");
         $id				= $_GET['id'];
-        $uid			= $_GET['u'];
+        // $uid			= $_GET['u'];
         $idq 			= sprintf("%07d", $id);
         $tarif			= 0;
         $biayatonase 	= 0;

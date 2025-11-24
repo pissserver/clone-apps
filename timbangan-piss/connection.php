@@ -2,7 +2,7 @@
 	$server 	= "localhost";
 	$username 	= "root";
 	$password 	= "";
-	$database 	= "db_piss";
+	$database 	= "clone_db_piss";
 	
 	// $server 		= "192.168.100.250";
 	// $username 	= "timbanganmasuksdtp";

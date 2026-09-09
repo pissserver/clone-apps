@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include "connection.php";
+	include "../sconnection.php";
 	include "components/role_session.php";
 	
 	function headScript(){
